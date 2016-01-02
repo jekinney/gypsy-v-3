@@ -39,6 +39,10 @@ class Market extends Model
     * Querys and Query Scopes
     */
 
+    public function soonest($take = 2)
+    {
+        return $this->with('type', 'times')->orderBy('end_at', 'desc')->take($take)->get();
+    }
     public function upcoming()
     {
         return $this->with('type', 'times')->where('end_at', '>', Carbon::now())->paginate(6);

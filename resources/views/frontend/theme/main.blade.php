@@ -13,7 +13,8 @@
 	</head>
 	<body>
 		@include('frontend/theme/partials/top_nav')
-		<main class="container">
+		@yield('page_header')
+		<main class="container-fluid">
 			@yield('content')
 		</main>
 		@include('frontend/theme/partials/footer')

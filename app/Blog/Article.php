@@ -26,6 +26,16 @@ class Article extends Model
     	return $this->belongsTo(User::class, 'user_id', 'id')->select(['id', 'username']);
     }
 
+    public function latest($take = 2)
+    {
+        return $this
+            ->where('publish_at', '<', Carbon::now())
+            ->where('draft', 0)
+            ->orderBy('publish_at', 'desc')
+            ->take($take)
+            ->get();
+    }
+
     public function scopeActive($query)
     {
     	return $query->where('publish_at', '<', Carbon::now())->where('draft', 0);

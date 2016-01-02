@@ -2,15 +2,17 @@
 
 namespace App\Http\Controllers\Frontend\Page;
 
-use Illuminate\Http\Request;
-
-use App\Http\Requests;
+use App\Blog\Article;
+use App\Markets\Market;
 use App\Http\Controllers\Controller;
 
 class PageController extends Controller
 {
-    public function home()
+    public function home(Market $market, Article $article)
     {
-    	return view('frontend.page.index');
+    	$markets = $market->soonest();
+    	$articles = $article->latest();
+
+    	return view('frontend.page.index', compact('markets', 'articles'));
     }
 }
