@@ -19,6 +19,13 @@ elixir(function(mix) {
 	//mix.copy('node_modules/bootstrap-sass/assets/fonts/bootstrap', 'public/frontend/fonts/bootstrap');
     mix.sass(['app.scss'], 'public/frontend/css/main.css');
     mix.scripts(['jquery.js', 'bootstrap.js', 'vue.js', 'vue-resource.js'], 'public/frontend/js/main.js');
-
     mix.version(['frontend/css/main.css', 'frontend/js/main.js']);
+
+    /*mix.styles([
+    	'../backend/css/bootstrap.min.css', 
+    	'../backend/css/admin.min.css', 
+    	'../backend/css/skin-blue.min.css'
+    	], 'public/backend/css/main.css');
+
+    mix.scripts(['jquery.js', 'bootstrap.js', '../backend/js/app.min.js'], 'public/backend/js/main.js');*/
 });

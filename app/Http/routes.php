@@ -11,22 +11,29 @@
 */
 
 Route::group(['middleware' => ['web']], function () {
-	Route::get('/', ['as'=>'home', 'uses' => 'Frontend\Page\PageController@home']);
-    Route::group(['prefix' => 'market', 'as' => 'market.', 'namespace' => 'Frontend\Market'], function() {
-    	Route::get('/', ['as'=>'index', 'uses'=>'MarketController@index']);
-    	Route::get('show/{market_slug}', ['as'=>'show', 'uses'=>'MarketController@show']);
-    	Route::get('type/{type_slug}', ['as'=>'type', 'uses'=>'MarketController@type']);
+    Route::group(['namespace' => 'Frontend'], function() {
+    	  Route::get('/', ['as'=>'home', 'uses' => 'Page\PageController@home']);
+            Route::group(['prefix' => 'market', 'as' => 'market.', 'namespace' => 'Market'], function() {
+        	  Route::get('/', ['as'=>'index', 'uses'=>'MarketController@index']);
+        	  Route::get('show/{market_slug}', ['as'=>'show', 'uses'=>'MarketController@show']);
+        	  Route::get('type/{type_slug}', ['as'=>'type', 'uses'=>'MarketController@type']);
+        });
+        Route::group(['prefix' => 'blog', 'as' => 'blog.', 'namespace' => 'Blog'], function() {
+    	      Route::get('/', ['as' => 'articles.index', 'uses'=>'ArticleController@index']);
+    	      Route::get('article/{slug}', ['as' => 'article.show', 'uses'=>'ArticleController@show']);
+    	      Route::get('categories', ['as' => 'categories.all', 'uses'=>'CategoryController@listWithCount']);
+        });
+        Route::group(['prefix' => 'gallery', 'as' => 'gallery.', 'namespace' => 'Gallery'], function() {
+            Route::get('/', ['as' => 'index', 'uses'=>'GalleryController@index']);
+            Route::get('{slug}', ['as' => 'show', 'uses'=>'GalleryController@show']);
+        });
+        Route::group(['prefix' => 'contact', 'as' => 'contact.', 'namespace' => 'Contact'], function() {
+            Route::get('/', ['as' => 'index', 'uses'=>'ContactController@index']);
+        });
     });
-    Route::group(['prefix' => 'blog', 'as' => 'blog.', 'namespace' => 'Frontend\Blog'], function() {
-	   Route::get('/', ['as' => 'articles.index', 'uses'=>'ArticleController@index']);
-	   Route::get('article/{slug}', ['as' => 'article.show', 'uses'=>'ArticleController@show']);
-	   Route::get('categories', ['as' => 'categories.all', 'uses'=>'CategoryController@listWithCount']);
-    });
-    Route::group(['prefix' => 'gallery', 'as' => 'gallery.', 'namespace' => 'Frontend\Gallery'], function() {
-       Route::get('/', ['as' => 'index', 'uses'=>'GalleryController@index']);
-       Route::get('{slug}', ['as' => 'show', 'uses'=>'GalleryController@show']);
-    });
-    Route::group(['prefix' => 'contact', 'as' => 'contact.', 'namespace' => 'Frontend\Contact'], function() {
-       Route::get('/', ['as' => 'index', 'uses'=>'ContactController@index']);
+
+    Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Backend'], function() {
+        Route::get('/', ['as' => 'home', 'uses'=>'Page\PageController@index']);
+
     });
 });
