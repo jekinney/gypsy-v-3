@@ -32,7 +32,7 @@
 				{!! $markets->links() !!}
 			</div>
 		</section>
-		<aside class="hidden-xs- hidden-sm col-md-3 col-lg-3">
+		<aside class="hidden-xs hidden-sm col-md-3 col-lg-3">
 			<div class="panel panel-primary">
   				<header class="panel-heading text-center">
     				<h3 class="panel-title">Market Types</h3>
