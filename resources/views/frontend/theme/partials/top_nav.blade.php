@@ -14,6 +14,7 @@
                 <li class="{{ Request::segment(1) === 'blog' ? 'active' : '' }}"><a href="{{ route('blog.articles.index') }}">Blog</a></li>
                 <li class="{{ Request::segment(1) === 'market' ? 'active' : '' }}"><a href="{{ route('market.index') }}">Market</a></li>
                 <li class="{{ Request::segment(1) === 'gallery' ? 'active' : '' }}"><a href="{{ route('gallery.index') }}">Gallery</a></li>
+                <li class="{{ Request::segment(1) === 'contact' ? 'active' : '' }}"><a href="{{ route('contact.index') }}">Contact Me</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="#">Register</a></li>

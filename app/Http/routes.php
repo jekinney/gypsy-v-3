@@ -22,8 +22,11 @@ Route::group(['middleware' => ['web']], function () {
 	   Route::get('article/{slug}', ['as' => 'article.show', 'uses'=>'ArticleController@show']);
 	   Route::get('categories', ['as' => 'categories.all', 'uses'=>'CategoryController@listWithCount']);
     });
-     Route::group(['prefix' => 'gallery', 'as' => 'gallery.', 'namespace' => 'Frontend\Gallery'], function() {
+    Route::group(['prefix' => 'gallery', 'as' => 'gallery.', 'namespace' => 'Frontend\Gallery'], function() {
        Route::get('/', ['as' => 'index', 'uses'=>'GalleryController@index']);
        Route::get('{slug}', ['as' => 'show', 'uses'=>'GalleryController@show']);
+    });
+    Route::group(['prefix' => 'contact', 'as' => 'contact.', 'namespace' => 'Frontend\Contact'], function() {
+       Route::get('/', ['as' => 'index', 'uses'=>'ContactController@index']);
     });
 });

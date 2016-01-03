@@ -13,7 +13,11 @@
 	</head>
 	<body>
 		@include('frontend/theme/partials/top_nav')
-		@yield('page_header')
+		<header class="container-fluid">
+			<div class="well">
+				<h1>The Sentimental Gypsy</h1>
+			</div>
+		</header>
 		<main class="container-fluid">
 			@yield('content')
 		</main>

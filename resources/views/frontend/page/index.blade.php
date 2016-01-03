@@ -1,21 +1,17 @@
 @extends('frontend.theme.main')
 
 @section('content')
-	<header class="well">
-		<h1>The Sentimental Gypsy</h1>
-	</header>
 	<section>
 		<header class="well text-center">
-			<h2>Come See The Sentimental Gypsy</h2>
+			<h2>Follow The Sentimental Gypsy</h2>
 		</header>
 		<div class="container">
 			<div class="row">
 				@foreach($markets as $market)
 					<div class="col-xs-12 col-sm-6">
 						<div class="thumbnail">
-							<header class="row">
-								<img src="{{ $market->type->image }}" class="img-responsive col-xs-6 col-sm-6">
-								<img src="{{ asset('images/placeholders/map.png') }}" class="img-responsive col-xs-6 col-sm-6">
+							<header>
+								<img src="{{ $market->type->image }}" class="img-responsive">
 							</header>
 							<article class="caption">
 								<h2 class="text-center">{{ $market->type->title }}</h2>
