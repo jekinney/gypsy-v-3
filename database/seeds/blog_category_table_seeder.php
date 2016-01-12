@@ -18,19 +18,6 @@ class blog_category_table_seeder extends Seeder
         	'description' => ''
         ]);
         */
-        Category::create([
-        	'title' => 'How To',
-        	'description' => 'How To Articles',
-        ]);
-
-        Category::create([
-        	'title' => 'Adventures',
-        	'description' => 'My Adventures',
-        ]);
-
-        Category::create([
-        	'title' => 'Opinion',
-        	'description' => 'My and only my opinions',
-        ]);
+        factory(Category::class, 10)->create();
     }
 }

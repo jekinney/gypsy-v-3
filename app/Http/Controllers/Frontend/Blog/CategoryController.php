@@ -18,7 +18,7 @@ class CategoryController extends Controller
 
     public function listWithCount()
     {
-    	$categories = $this->category->listWithArticleCount();
+    	$categories = $this->category->listingWithArticleCount();
     	
     	return view('frontend.blog.category.index', compact('categories'));
     }

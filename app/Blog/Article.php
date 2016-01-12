@@ -2,6 +2,7 @@
 
 namespace App\Blog;
 
+use DB;
 use App\User;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
@@ -16,6 +17,11 @@ class Article extends Model
 
     protected $dates = ['publish_at'];
 
+    public function setSlugAttribute($slug)
+    {
+        return $this->attributes['slug'] = str_slug($slug);
+    }
+
     public function category()
     {
     	return $this->belongsTo(Category::class, 'category_id', 'id')->select(['id', 'title']);
@@ -24,6 +30,19 @@ class Article extends Model
     public function author()
     {
     	return $this->belongsTo(User::class, 'user_id', 'id')->select(['id', 'username']);
+    }
+
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
+
+    public function scopePublishedCountWithCommentCount($query)
+    {
+        return $query->with(['comments' => function($q) {
+                    $q->select(DB::raw('count(id) as comment_count'))
+                      ->where('hidden', 0);
+                }])->where('draft', 0)->where('publish_at', '<', Carbon::now())->count();
     }
 
     public function latest($take = 2)

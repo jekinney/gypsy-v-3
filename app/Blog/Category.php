@@ -8,35 +8,30 @@ class Category extends Model
 {
     protected $fillable = ['title', 'description'];
 
+    public function setSlugAttribute($slug)
+    {
+        return $this->attributes['slug'] = str_slug($slug);
+    }
+
     public function articles()
     {
     	return $this->hasMany(Article::class);
     }
 
-    public function scopeSelectList($query)
+    public function scopeSelectList()
     {
-    	return $query->get(['title']);
+    	return $this->get(['id', 'title']);
     }
 
-    public function scopeList($query)
+    public function scopeListing()
     {
-    	return $query->get(['title', 'description']);
+    	return $this->get(['title', 'slug', 'description']);
     }
 
-    public function scopeListWithArticleCount($query)
+    public function scopeListingWithArticleCount()
     {
-    	$categories = $query->get(['title']);
-
-        foreach($categories as $category)
-        {
-            $cat = $category->load(['articles' => function($q) {
-                $q->select(['id']);
-            }]);
-
-            $category = array_add($category, 'count', $cat->articles->count());
-            $category = array_except($category, ['articles']);
-        }
-
-        return $categories;
+    	return $this->with(['articles' => function($q) {
+                  $q->select(['id']);
+               }])->get();
     }
 }

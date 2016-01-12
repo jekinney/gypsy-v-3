@@ -11,6 +11,10 @@ class PageController extends Controller
 {
     public function index()
     {
-    	return view('backend.page.index');
+    	$article_counts = \App\Blog\Article::publishedCountWithCommentCount();
+    	$user_count = \App\User::count();
+    	$event_count = \App\Markets\Market::CurrentAndFutureCount();
+
+    	return view('backend.page.index', compact('article_counts', 'user_count', 'event_count'));
     }
 }

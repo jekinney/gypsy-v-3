@@ -33,6 +33,6 @@ class CategoryComposer
      */
     public function compose(View $view)
     {
-        $view->with('categories', $this->category->listWithArticleCount());
+        $view->with('categories', $this->category->listingWithArticleCount());
     }
 }

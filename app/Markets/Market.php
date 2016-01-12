@@ -39,6 +39,10 @@ class Market extends Model
     * Querys and Query Scopes
     */
 
+    public function scopeCurrentAndFutureCount($query)
+    {
+        return $query->where('end_at', '>', Carbon::now())->count();
+    }
     public function soonest($take = 2)
     {
         return $this->with('type', 'times')->orderBy('end_at', 'desc')->take($take)->get();
@@ -63,5 +67,15 @@ class Market extends Model
         return $this->has(['type' => function($q) {
                     $q->where('slug', $type_slug);
                 }])->with('times')->paginate(6);
+    }
+
+    public function scopeFindById($query, $id)
+    {
+        return $query->with('type', 'times')->find($id);
+    }
+
+    public function scopeAllWithTypeAndTimes($query)
+    {
+        return $query->with('type', 'times')->get();
     }
 }
