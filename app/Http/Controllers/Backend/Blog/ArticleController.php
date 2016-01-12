@@ -48,4 +48,18 @@ class ArticleController extends Controller
 
         return view('backend.blog.article.list', compact('articles', 'list_type'));
     }
+
+    public function store(Request $request)
+    {
+        $this->article->addNew($request);
+
+        return back();
+    }
+
+    public function update(Request $request)
+    {
+        $this->article->submitUpdate($request);
+
+        return back();
+    }
 }

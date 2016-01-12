@@ -49,7 +49,7 @@
 				                        @endforeach
 				                    </select>
 				                </div>
-				                <div class="form-group col-xs-6 col-sm-3">
+				                <div class="form-group col-xs-6 col-sm-3 date">
 			                        <label for="publish_at">Publish Date</label>
 			                        <input 
 			                            type="text" 
@@ -57,6 +57,8 @@
 			                            id="publish_at" 
 			                            value="{{ old('publish_at') }}" 
 			                            class="form-control" 
+			                            data-provide="datepicker"
+			                            data-date-format="yyyy-mm-dd"
 			                            required 
 			                        >
 			                    </div>
@@ -88,15 +90,11 @@
 		                    </div>
 			                <div class="form-group">
 			                    <label for="snippet">Snippet (Short overview or part of your article) </label>
-			                    <textarea name="snippet" id="snippet" class="form-control">
-									{{ old('snippet') }}
-			                    </textarea>
+			                    <textarea name="snippet" id="snippet" class="form-control">{{ old('snippet') }}</textarea>
 			                </div>
 			                <div class="form-group">
 			                    <label for="body">Article Body</label>
-			                    <textarea name="body" id="body" class="form-control">
-									{{ old('body') }}
-			                    </textarea>
+			                    <textarea name="body" id="body" class="form-control">{{ old('body') }}</textarea>
 			                </div>
 			                <div class="form-group text-right">
 			                    <button type="submit" class="btn btn-primary">Add Article</button>
@@ -141,7 +139,6 @@
 	    $("#header").change(function(){
 	        readURL(this);
 	    });
-
         $(function () {
             CKEDITOR.replace('body');
         });

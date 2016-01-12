@@ -29,8 +29,9 @@
 			        <div class="box-body pad">
 			            <form action="{{ route('admin.blog.article.update') }}" method="post" enctype="multipart/form-data">
 			            	<input type="hidden" name="_method" value="put">
+			            	<input type="hidden" name="id" value="{{ $article->id }}">
 			                {{ csrf_field() }}
-			                <img id="header-preview" src="{{ $article->header_image }}" alt="Your Header Image" class="img-responsive" style="max-height:300px;">
+			                <img id="header-preview" src="{{ asset($article->header_image) }}" alt="Your Header Image" class="img-responsive" style="max-height:300px;">
 			                <div class="form-group">
 			                	<label for="header">Header Image/Banner</label>
 			                	<input type="file" name="header_image"  id="header" class="form-control">
@@ -50,7 +51,7 @@
 				                        @endforeach
 				                    </select>
 				                </div>
-				                <div class="form-group col-xs-6 col-sm-3">
+				                <div class="form-group col-xs-6 col-sm-3 date">
 			                        <label for="publish_at">Publish Date</label>
 			                        <input 
 			                            type="text" 
@@ -58,6 +59,8 @@
 			                            id="publish_at" 
 			                            value="{{ $article->publish_at->toDateString() }}" 
 			                            class="form-control" 
+			                            data-provide="datepicker"
+			                            data-date-format="yyyy-mm-dd"
 			                            required 
 			                        >
 			                    </div>
@@ -88,15 +91,11 @@
 		                    </div>
 			                <div class="form-group">
 			                    <label for="snippet">Snippet (Short overview or part of your article) </label>
-			                    <textarea name="snippet" id="snippet" class="form-control">
-									{{ $article->snippet }}
-			                    </textarea>
+			                    <textarea name="snippet" id="snippet" class="form-control">{{ $article->snippet }}</textarea>
 			                </div>
 			                <div class="form-group">
 			                    <label for="body">Article Body</label>
-			                    <textarea name="body" id="body" class="form-control">
-									{{ $article->body }}
-			                    </textarea>
+			                    <textarea name="body" id="body" class="form-control">{{ $article->body }}</textarea>
 			                </div>
 			                <div class="form-group text-right">
 			                    <button type="submit" class="btn btn-primary">Update Article</button>

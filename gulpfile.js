@@ -31,7 +31,8 @@ elixir(function(mix) {
     	'../backend/css/bootstrap.min.css', 
     	'../backend/css/admin.min.css', 
     	'../backend/css/skin-blue.min.css',
-        'font-awesome.css'
+        '../backend/js/datepicker/datepicker3.css',
+        'font-awesome.css',
     	], 'public/backend/css/main.css');
 
     mix.scripts([

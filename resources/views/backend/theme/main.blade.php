@@ -25,6 +25,7 @@
 		</div>
 	
 		<script src="{{ elixir('backend/js/main.js') }}"></script>
+		<script src="{{ asset('backend/js/datepicker/bootstrap-datepicker.js') }}"></script>
 		@yield('scripts')
 	</body>
 </html>
