@@ -31,9 +31,11 @@ $factory->define(App\Blog\Category::class, function (Faker\Generator $faker) {
 
 $factory->define(App\Blog\Article::class, function (Faker\Generator $faker) {
 	$title = $faker->sentence;
+    $users = \App\User::get();
+    $categories = \App\Blog\Category::all();
     return [
-    	'user_id' => factory(App\User::class)->create()->id,
-    	'category_id' => factory(App\Blog\Category::class)->create()->id,
+    	'user_id' => $users->random(1)->id,
+    	'category_id' => $categories->random(1)->id,
     	'header_image' => $faker->imageUrl(1200, 300),
         'title' => $title,
         'slug' => $title,

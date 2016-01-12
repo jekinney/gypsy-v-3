@@ -46,10 +46,9 @@ Route::group(['middleware' => ['web']], function () {
             });
             Route::group(['prefix' => 'category', 'as'=>'category.'], function() {
                 Route::get('list', ['as' => 'list', 'uses'=>'CategoryController@listing']);
-                Route::get('create', ['as' => 'create', 'uses'=>'CategoryController@create']);
-                Route::get('edit/{id}', ['as' => 'edit', 'uses'=>'CategoryController@edit']);
                 Route::post('store', ['as'=>'store', 'uses'=>'CategoryController@store']);
                 Route::put('update', ['as'=>'update', 'uses'=>'CategoryController@update']);
+                Route::delete('remove/{id}', ['as'=>'remove', 'uses'=>'CategoryController@remove']);
             });
         });
 

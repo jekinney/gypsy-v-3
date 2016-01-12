@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Category extends Model
 {
-    protected $fillable = ['title', 'description'];
+    protected $fillable = ['slug', 'title', 'description'];
 
     public function setSlugAttribute($slug)
     {
@@ -33,5 +33,30 @@ class Category extends Model
     	return $this->with(['articles' => function($q) {
                   $q->select(['id']);
                }])->get();
+    }
+
+    public function addNew($request)
+    {
+        return $this->create([
+            'slug'        => trim($request->title), 
+            'title'       => trim($request->title), 
+            'description' => trim($request->desciption)
+        ]);
+    }
+
+    public function submitUpdate($request)
+    {
+        $category = $this->find($request->id);
+        $category->update([
+            'slug'        => trim($request->title), 
+            'title'       => trim($request->title), 
+            'description' => trim($request->description)
+        ]);
+        return $category;
+    }
+
+    public function remove($id)
+    {
+        $this->find($id)->delete();
     }
 }

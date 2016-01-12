@@ -33,7 +33,7 @@
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body pad">
-                    <form action="" method="post">
+                    <form action="{{ route('admin.blog.category.store') }}" method="post">
                         {{ csrf_field() }}
                         <div class="row">
                             <div class="form-group col-xs-12 col-sm-6">
@@ -60,7 +60,7 @@
                         Current Categories
                     </h3>
                     <div class="pull-right box-tools">
-                        <a role="button" class="text-primary" data-toggle="modal" data-target="#market-form-help">
+                        <a role="button" class="text-primary" data-toggle="modal" data-target="#categoryHelp">
                             <i class="fa fa-question-circle fa-2x"></i>
                         </a>
                     </div>
@@ -82,13 +82,25 @@
                                     <td>{{ $category->title }}</td>
                                     <td>{{ $category->description }}</td>
                                     <td>{{ $category->articles()->count() }}</td>
-                                    <td class="btn-group">
-                                        <a href="{{ route('admin.market.edit', $category->id) }}" class="btn btn-primary btn-sm">
-                                            <i class="fa fa-cog"></i>
-                                        </a>
-                                        <button class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></button>
+                                    <td>
+                                        <form action="{{ route('admin.blog.category.remove', $category->id) }}" method="post">
+                                            <input type="hidden" name="_method" value="delete">
+                                            {{ csrf_field() }}
+                                            <div class="btn-group">
+                                                <a role="button" class="btn btn-primary btn-sm" 
+                                                    data-toggle="modal" 
+                                                    data-target="#editCategory{{ $category->id }}"
+                                                >
+                                                    <i class="fa fa-cog"></i>
+                                                </a>
+                                                <button type="submit" class="btn btn-danger btn-sm" @if($category->articles()->count() > 0) disabled @endif>
+                                                    <i class="fa fa-trash"></i>
+                                                </button>
+                                            </div>
+                                        </form>
                                     </td>
                                 </tr>
+                                @include('backend.blog.category.modals.edit_modal')
                             @endforeach
                         </tbody>
                     </table>
@@ -97,4 +109,5 @@
         </section>
     </div>
 </section>
+@include('backend.blog.category.modals.help_modal')
 @endsection

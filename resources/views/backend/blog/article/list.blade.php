@@ -18,10 +18,10 @@
 		        <div class="box box-info">
 		            <div class="box-header">
 		                <h3 class="box-title">
-		                    Create New Article Form
+		                    {{ ucwords($list_type) }} Articles with a total: {{ $articles->count() }}
 		                </h3>
 		                <div class="pull-right box-tools">
-		                    <a role="button" class="text-primary" data-toggle="modal" data-target="#article-form-help">
+		                    <a role="button" class="text-primary" data-toggle="modal" data-target="#article-list-help">
 		                        <i class="fa fa-question-circle fa-2x"></i>
 		                    </a>
 		                </div>
@@ -62,6 +62,7 @@
 			</div>
 		</div>
 	</section>
+	@include('backend.blog.article.modals.list_help')
 @endsection
 
 @section('scripts')

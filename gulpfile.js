@@ -39,8 +39,10 @@ elixir(function(mix) {
         'bootstrap.js', 
         'moment.js',
         'jquery-ui.js',
+        'vue.js', 
+        'vue-resource.js',
         '../backend/js/app.js',
-        
         ], 'public/backend/js/main.js');
+    
     mix.version(['backend/css/main.css', 'backend/js/main.js']);
 });

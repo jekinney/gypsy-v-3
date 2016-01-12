@@ -27,10 +27,12 @@
 		                </div>
 		            </div>
 			        <div class="box-body pad">
-			            <form action="{{ route('admin.blog.article.store') }}" method="post">
+			            <form action="{{ route('admin.blog.article.store') }}" method="post" enctype="multipart/form-data">
 			                {{ csrf_field() }}
-			                <div class="">
-								Header Image Upload
+			                <img id="header-preview" src="#" alt="Your Header Image" class="img-responsive" style="max-height:300px; max-width:1200px;">
+			                <div class="form-group">
+			                	<label for="header">Header Image/Banner</label>
+			                	<input type="file" name="header_image"  id="header" class="form-control">
 			                </div>
 			                <div class="row">
 				                <div class="form-group col-xs-12 col-sm-6">
@@ -116,6 +118,7 @@
 		    </aside>
 		</div>
 	</section>
+	@include('backend.blog.article.modals.form_help')
 @endsection
 
 @section('scripts')
@@ -123,6 +126,22 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/iCheck/1.0.1/icheck.min.js"></script>
     
     <script>
+	    function readURL(input) {
+	        if (input.files && input.files[0]) {
+	            var reader = new FileReader();
+	            
+	            reader.onload = function (e) {
+	                $('#header-preview').attr('src', e.target.result);
+	            }
+	            
+	            reader.readAsDataURL(input.files[0]);
+	        }
+	    }
+	    
+	    $("#header").change(function(){
+	        readURL(this);
+	    });
+
         $(function () {
             CKEDITOR.replace('body');
         });
