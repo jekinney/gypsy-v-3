@@ -120,6 +120,21 @@ class Article extends Model
     	return $article;
     }
 
+    public function scopeUnpublished($query)
+    {
+        return $query->with('category')->where('draft', 1)->orWhere('publish_at', '>', Carbon::now())->get();
+    }
+
+    public function scopePublished($query)
+    {
+        return $query->with('category')->where('draft', 0)->where('publish_at', '<', Carbon::now())->get();
+    }
+
+    public function scopeFindById($query, $id)
+    {
+        return $query->with('category')->find($id);
+    }
+
     protected function addToRead($article)
     {
         $count = $article->reads;

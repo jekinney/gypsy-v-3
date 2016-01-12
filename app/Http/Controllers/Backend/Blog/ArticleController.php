@@ -32,4 +32,20 @@ class ArticleController extends Controller
 
     	return view('backend.blog.article.edit', compact('article', 'categories'));
     }
+
+    public function unpublishedList()
+    {
+        $articles = $this->article->unpublished();
+        $list_type = 'Unpublished and/or drafts';
+
+        return view('backend.blog.article.list', compact('articles', 'list_type'));
+    }
+
+    public function publishedList()
+    {
+        $articles = $this->article->published();
+        $list_type = 'published';
+
+        return view('backend.blog.article.list', compact('articles', 'list_type'));
+    }
 }

@@ -16,7 +16,44 @@
 <section class="content">
     <!-- Small boxes (Stat box) -->
     <div class="row">
-        <section class="col-xs-12 col-sm-6 col-md-9">
+        <section class="col-xs-12">
+            <div class="box box-info">
+                <div class="box-header">
+                    <h3 class="box-title">
+                        Create New Category
+                    </h3>
+                    <div class="box-tools pull-right">
+                        <button type="button" class="btn btn-info btn-sm" 
+                            data-widget="collapse" data-toggle="tooltip" title="" 
+                            data-original-title="Collapse"
+                        >
+                            <i class="fa fa-minus"></i>
+                        </button>
+                      </div>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body pad">
+                    <form action="" method="post">
+                        {{ csrf_field() }}
+                        <div class="row">
+                            <div class="form-group col-xs-12 col-sm-6">
+                                <label for="title">Title</label>
+                                <input type="text" name="title" id="title" class="form-control" placeholder="Short but descriptive title" required>
+                            </div>
+                            <div class="form-group col-xs-12 col-sm-6">
+                                <label for="description">Description</label>
+                                <input type="text" name="description" id="description" class="form-control" placeholder="Describe your category. Mainly just for your notes" required>
+                            </div>
+                        </div>
+                        <div class="text-right">
+                            <button type="reset" class="btn btn-default">Reset</button>
+                            <button type="submit" class="btn btn-primary">Add Category</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+        <section class="col-xs-12">
             <div class="box box-info">
                 <div class="box-header">
                     <h3 class="box-title">
@@ -58,33 +95,6 @@
                 </div>
             </div>
         </section>
-        <aside class="col-xs-12 col-sm-6 col-md-3">
-            <div class="box box-info">
-                <div class="box-header">
-                    <h3 class="box-title">
-                        Create New Category
-                    </h3>
-                </div>
-                <!-- /.box-header -->
-                <div class="box-body pad">
-                    <form action="" method="post">
-                        {{ csrf_field() }}
-                        <div class="form-group">
-                            <label for="title">Title</label>
-                            <input type="text" name="title" id="title" class="form-control" placeholder="Short but descriptive title" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="description">Description</label>
-                            <input type="text" name="description" id="description" class="form-control" placeholder="Describe your category. Mainly just for your notes" required>
-                        </div>
-                        <div class="text-right">
-                            <button type="reset" class="btn btn-default">Reset</button>
-                            <button type="submit" class="btn btn-primary">Add Category</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </aside>
     </div>
 </section>
 @endsection

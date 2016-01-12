@@ -18,9 +18,11 @@ elixir(function(mix) {
 	//mix.copy('node_modules/bootstrap-sass/assets/javascripts/bootstrap.js', 'resources/assets/js/bootstrap.js');
 	//mix.copy('node_modules/bootstrap-sass/assets/fonts/bootstrap', 'public/frontend/fonts/bootstrap');
     //mix.copy('node_modules/bootstrap-sass/assets/fonts/bootstrap', 'public/backend/fonts/bootstrap');
-    mix.copy('node_modules/font-awesome/css/font-awesome.css', 'resources/assets/css/font-awesome.css');
-    mix.copy('node_modules/font-awesome/fonts', 'public/frontend/fonts');
-    mix.copy('node_modules/font-awesome/fonts', 'public/backend/fonts');
+    //mix.copy('node_modules/font-awesome/css/font-awesome.css', 'resources/assets/css/font-awesome.css');
+    //mix.copy('node_modules/font-awesome/fonts', 'public/frontend/fonts');
+    //mix.copy('node_modules/font-awesome/fonts', 'public/backend/fonts');
+    //mix.copy('node_modules/moment/moment.js', 'resources/assets/js/moment.js');
+    //mix.copy('node_modules/jquery-ui/jquery-ui.js', 'resources/assets/js/jquery-ui.js');
     mix.sass(['app.scss'], 'public/frontend/css/main.css');
     mix.scripts(['jquery.js', 'bootstrap.js', 'vue.js', 'vue-resource.js'], 'public/frontend/js/main.js');
     mix.version(['frontend/css/main.css', 'frontend/js/main.js']);
@@ -35,7 +37,10 @@ elixir(function(mix) {
     mix.scripts([
         'jquery.js', 
         'bootstrap.js', 
-        '../backend/js/app.min.js',
+        'moment.js',
+        'jquery-ui.js',
+        '../backend/js/app.js',
         
         ], 'public/backend/js/main.js');
+    mix.version(['backend/css/main.css', 'backend/js/main.js']);
 });
