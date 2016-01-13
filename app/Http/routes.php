@@ -53,11 +53,18 @@ Route::group(['middleware' => ['web']], function () {
         });
 
         Route::group(['prefix' => 'market', 'as' => 'market.', 'namespace' => 'Market'], function() {
-              Route::get('/', ['as'=>'index', 'uses'=>'MarketController@index']);
-              Route::get('create', ['as'=>'create', 'uses'=>'MarketController@create']);
-              Route::get('edit/{id}', ['as'=>'edit', 'uses'=>'MarketController@edit']);
-              Route::post('store', ['as'=>'store', 'uses'=>'MarketController@store']);
-              Route::put('update', ['as'=>'update', 'uses'=>'MarketController@update']);
+            Route::get('/', ['as'=>'index', 'uses'=>'MarketController@index']);
+            Route::get('create', ['as'=>'create', 'uses'=>'MarketController@create']);
+            Route::get('edit/{id}', ['as'=>'edit', 'uses'=>'MarketController@edit']);
+            Route::post('store', ['as'=>'store', 'uses'=>'MarketController@store']);
+            Route::put('update', ['as'=>'update', 'uses'=>'MarketController@update']);
+
+            Route::group(['prefix' => 'type', 'as' => 'type.'], function() {
+                Route::get('/', ['as'=>'index', 'uses'=>'TypeController@index']);
+                Route::post('store', ['as'=>'store', 'uses'=>'TypeController@store']);
+                Route::put('update', ['as'=>'update', 'uses'=>'TypeController@update']);
+                Route::delete('remove/{id}', ['as'=>'remove', 'uses'=>'TypeController@remove']);
+            });
         });
     });
 });

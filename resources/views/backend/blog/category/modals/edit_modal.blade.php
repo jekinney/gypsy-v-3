@@ -16,9 +16,7 @@
                     </div>
                     <div class="form-input">
                         <label for="description{{ $category->id }}">Description</label>
-                        <textarea name="description" id="description{{ $category->id }}" class="form-control">
-                            {{ $category->description }}
-                        </textarea>
+                        <textarea name="description" id="description{{ $category->id }}" class="form-control">{{ $category->description }}</textarea>
                     </div>
                 </div>
                 <div class="modal-footer">
