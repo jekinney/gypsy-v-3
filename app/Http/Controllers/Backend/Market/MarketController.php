@@ -19,11 +19,12 @@ class MarketController extends Controller
         $this->market = $market;
     }
 
-    public function index()
+    public function index(Item $item)
     {
         $markets = $this->market->AllWithTypeAndTimes();
+        $items   = $this->item->selectListWithMainImage();
 
-    	return view('backend.market.index', compact('markets'));
+    	return view('backend.market.index', compact('markets', 'items'));
     }
 
     public function create(Type $type, Item $item)

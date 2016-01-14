@@ -65,6 +65,13 @@ Route::group(['middleware' => ['web']], function () {
                 Route::put('update', ['as'=>'update', 'uses'=>'TypeController@update']);
                 Route::delete('remove/{id}', ['as'=>'remove', 'uses'=>'TypeController@remove']);
             });
+
+            Route::group(['prefix' => 'item', 'as' => 'item.'], function() {
+                Route::get('/', ['as'=>'index', 'uses'=>'ItemController@index']);
+                Route::post('store', ['as'=>'store', 'uses'=>'ItemController@store']);
+                Route::put('update', ['as'=>'update', 'uses'=>'ItemController@update']);
+                Route::delete('remove/{id}', ['as'=>'remove', 'uses'=>'ItemController@remove']);
+            });
         });
     });
 });

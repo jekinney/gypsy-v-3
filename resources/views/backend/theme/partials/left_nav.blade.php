@@ -30,6 +30,7 @@
                     <li><a href="{{ route('admin.market.index') }}"><i class="fa fa-circle-o"></i> List of All Markets</a></li>
                     <li><a href="{{ route('admin.market.create') }}"><i class="fa fa-circle-o"></i> Create New Market</a></li>
                     <li><a href="{{ route('admin.market.type.index') }}"><i class="fa fa-circle-o"></i> Manage Market Types</a></li>
+                    <li><a href="{{ route('admin.market.item.index') }}"><i class="fa fa-circle-o"></i> Manage Market Items</a></li>
                 </ul>
             </li>
             <li class="{{ Request::segment(2) === 'gallery' ? 'active' : '' }}">

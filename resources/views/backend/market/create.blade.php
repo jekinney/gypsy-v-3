@@ -127,27 +127,10 @@
                 <div class="box box-danger">
                     <div class="box-header">
                         <h3 class="box-title">
-                            Add Item to Item List
+                            List of Items to Select
                         </h3>
                         <div class="box-tools pull-right">
                             <button type="button" class="btn btn-danger btn-sm" 
-                                data-widget="collapse" data-toggle="tooltip" title="" 
-                                data-original-title="Collapse"
-                            >
-                                <i class="fa fa-minus"></i>
-                            </button>
-                        </div>
-                    </div>
-                    <div class="box-body pad">
-                    </div>
-                </div>
-                <div class="box box-success">
-                    <div class="box-header">
-                        <h3 class="box-title">
-                            List Items For Sale
-                        </h3>
-                        <div class="box-tools pull-right">
-                            <button type="button" class="btn btn-success btn-sm" 
                                 data-widget="collapse" data-toggle="tooltip" title="" 
                                 data-original-title="Collapse"
                             >

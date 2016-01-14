@@ -10,7 +10,7 @@ class PageController extends Controller
 {
     public function home(Market $market, Article $article)
     {
-    	$markets = $market->soonest();
+    	$markets  = $market->latest(3);
     	$articles = $article->latest();
 
     	return view('frontend.page.index', compact('markets', 'articles'));

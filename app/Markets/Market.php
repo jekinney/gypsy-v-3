@@ -40,7 +40,7 @@ class Market extends Model
     {
         return $query->where('end_at', '>', Carbon::now())->count();
     }
-    public function soonest($take = 2)
+    public function latest($take = 3)
     {
         return $this->with('type', 'times')->orderBy('end_at', 'desc')->take($take)->get();
     }
@@ -79,6 +79,7 @@ class Market extends Model
     public function addNew($request)
     {
         $market = $this->create([
+            'type_id'     => $request->type_id,
             'slug'        => str_slug($request->title),
             'title'       => $request->title,
             'description' => $request->description,
@@ -95,6 +96,7 @@ class Market extends Model
     {
         $market = $this->find($request->id);
         $market->update([
+            'type_id'     => $request->type_id,
             'slug'        => str_slug($request->title),
             'title'       => $request->title,
             'description' => $request->description,
@@ -104,7 +106,7 @@ class Market extends Model
 
         $this->attachTimes($market, $request);
 
-        return dd($market->load('times'));
+        return $market->load('times');
     }
 
     protected function attachTimes($market, $request)

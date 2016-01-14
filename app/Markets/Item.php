@@ -20,4 +20,9 @@ class Item extends Model
     			}])->paginate($limit);
     }
 
+    public function allWithImagesPaginated($limit = 10)
+    {
+        return $this->with('images')->get();
+    }
+
 }
