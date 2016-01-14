@@ -15,14 +15,6 @@ class Market extends Model
     protected $dates = ['start_at', 'end_at'];
 
     /**
-    * Attributes to columns in database
-    */
-    public function setSlugAttribute($slug)
-    {
-        $this->attributes['slug'] = str_slug($slug);
-    }
-
-    /**
     * Relationships to other models
     */
     public function type()
@@ -33,6 +25,11 @@ class Market extends Model
     public function times()
     {
     	return $this->hasMany(Time::class);
+    }
+
+    public function items()
+    {
+        return $this->belongsToMany(Item::class);
     }
 
     /**
@@ -77,5 +74,53 @@ class Market extends Model
     public function scopeAllWithTypeAndTimes($query)
     {
         return $query->with('type', 'times')->get();
+    }
+
+    public function addNew($request)
+    {
+        $market = $this->create([
+            'slug'        => str_slug($request->title),
+            'title'       => $request->title,
+            'description' => $request->description,
+            'start_at'    => $request->start_at,
+            'end_at'      => $request->end_at,
+        ]);
+
+        $this->attachTimes($market, $request);
+
+        return $market;
+    }
+
+    public function submitUpdate($request)
+    {
+        $market = $this->find($request->id);
+        $market->update([
+            'slug'        => str_slug($request->title),
+            'title'       => $request->title,
+            'description' => $request->description,
+            'start_at'    => $request->start_at,
+            'end_at'      => $request->end_at,
+        ]);
+
+        $this->attachTimes($market, $request);
+
+        return dd($market->load('times'));
+    }
+
+    protected function attachTimes($market, $request)
+    {
+        $date = $market->start_at->toDateString();
+        for($i = 0; $request->days > $i; $i++)
+        {
+            if($i > 0) {
+                $date = $market->start_at->addDays($i)->toDateString();
+            }
+            Time::create([
+                'market_id' => $market->id,
+                'start' => Carbon::createFromFormat('Y-m-d h:i', $date.' '.$request->start_time[$i])->toDateTimeString(), 
+                'end' => Carbon::createFromFormat('Y-m-d h:i', $date.' '.$request->end_time[$i])->toDateTimeString()
+            ]);
+
+        }
     }
 }

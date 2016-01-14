@@ -73,6 +73,7 @@
 				                            @if(old('draft')) checked="true" @endif 
 				                        >
 				                        Keep Article as a Draft
+				                    </label>
 			                    </div>
 			                </div>
 		                    <div class="form-group">

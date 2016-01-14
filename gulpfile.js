@@ -22,6 +22,7 @@ elixir(function(mix) {
     //mix.copy('node_modules/font-awesome/fonts', 'public/frontend/fonts');
     //mix.copy('node_modules/font-awesome/fonts', 'public/backend/fonts');
     //mix.copy('node_modules/moment/moment.js', 'resources/assets/js/moment.js');
+    //mix.copy('node_modules/twix/dist/twix.js', 'resources/assets/js/twix.js');
     //mix.copy('node_modules/jquery-ui/jquery-ui.js', 'resources/assets/js/jquery-ui.js');
     mix.sass(['app.scss'], 'public/frontend/css/main.css');
     mix.scripts(['jquery.js', 'bootstrap.js', 'vue.js', 'vue-resource.js'], 'public/frontend/js/main.js');
@@ -32,6 +33,7 @@ elixir(function(mix) {
     	'../backend/css/admin.min.css', 
     	'../backend/css/skin-blue.min.css',
         '../backend/js/datepicker/datepicker3.css',
+        '../backend/css/timepicker/bootstrap-timepicker.css',
         'font-awesome.css',
     	], 'public/backend/css/main.css');
 
@@ -42,7 +44,9 @@ elixir(function(mix) {
         'jquery-ui.js',
         'vue.js', 
         'vue-resource.js',
+        'moment.js',
         '../backend/js/app.js',
+        '../backend/js/timepicker/bootstrap-timepicker.js',
         ], 'public/backend/js/main.js');
     
     mix.version(['backend/css/main.css', 'backend/js/main.js']);

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Backend\Market;
 
 use Illuminate\Http\Request;
 
+use App\Markets\Item;
 use App\Markets\Type;
 use App\Markets\Market;
 use App\Http\Requests;
@@ -25,9 +26,12 @@ class MarketController extends Controller
     	return view('backend.market.index', compact('markets'));
     }
 
-    public function create()
+    public function create(Type $type, Item $item)
     {
-    	return view('backend.market.create');
+        $types = $type->selectList();
+        $items = $item->selectListWithMainImage();
+
+    	return view('backend.market.create', compact('types', 'items'));
     }
 
     public function edit($id, Type $type)
@@ -40,7 +44,9 @@ class MarketController extends Controller
 
     public function store(Request $request)
     {
+        $this->market->addNew($request);
 
+        return back();
     }
 
     public function update(Request $request)
