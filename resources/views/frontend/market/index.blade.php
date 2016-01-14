@@ -9,7 +9,7 @@
 						<div class="col-xs-12 col-sm-6 col-md-4">
 							<div class="thumbnail">
 								<header>
-									<img src="{{ $market->type->image }}" class="img-responsive">
+									<img src="{{ asset($market->type->image) }}" class="img-responsive">
 								</header>
 								<article class="caption">
 									<h2 class="text-center">{{ $market->type->title }}</h2>

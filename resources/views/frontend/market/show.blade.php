@@ -4,7 +4,7 @@
 	<section class="well">
 		<div class="row">
 		<header class="colxs-12 col-sm-6 col-md-4"> 
-			<img src="{{ $market->type->image }}" class="img-responsive">
+			<img src="{{ asset($market->type->image) }}" class="img-responsive">
 			<h1 class="text-center">{{ $market->type->title }}</h1>
 		</header>
 		<article class="col-xs-12 col-sm-6 col-md-8">
