@@ -9,7 +9,9 @@
 | kernel and includes session state, CSRF protection, and more.
 |
 */
-
+Route::group(['prefix' => '/admin/market/item/image'], function() {
+    Route::post('store', ['as' => 'store', 'uses' => 'Backend\Market\ItemImageController@store']);
+});
 Route::group(['middleware' => ['web']], function () {
     Route::group(['namespace' => 'Frontend'], function() {
     	  Route::get('/', ['as'=>'home', 'uses' => 'Page\PageController@home']);

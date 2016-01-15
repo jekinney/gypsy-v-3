@@ -23,7 +23,7 @@ class ItemController extends Controller
     	return view('backend.market.item.index', compact('items'));
     }
 
-    public function store(CreateForm $request)
+    public function store(Request $request)
     {
     	$this->item->addNew($request);
 

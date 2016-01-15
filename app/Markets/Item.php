@@ -25,4 +25,24 @@ class Item extends Model
         return $this->with('images')->get();
     }
 
+    public function addNew($request)
+    {
+        sleep(10);
+        $item = $this->create($request->all());
+        $this->temporaryPhotoCheck($item);
+        return $item;
+    }
+
+    protected function temporaryPhotoCheck($item)
+    {
+        $photos = ItemImage::where('item_id', 0)->get();
+        if($photos)
+        {
+            foreach($photos as $photo)
+            {
+                $photo->update(['item_id' => $item->id]);
+            }
+        }
+    }
+
 }

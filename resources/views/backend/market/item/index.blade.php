@@ -14,7 +14,7 @@
     </section>
     <section class="content">
         <div class="row">
-            <section class="col-xs-12 col-sm-6">
+            <section id="createItem" class="col-xs-12 col-sm-6">
                 <div class="box box-success">
                     <div class="box-header">
                         <h3 class="box-title">
@@ -27,117 +27,86 @@
                         </div>
                     </div>
                     <div class="box-body pad">
-                        <form action="{{ route('admin.market.item.store') }}" method="post" enctype="multipart/form-data">
+                        <form action="{{ route('admin.market.item.store') }}" id="form" method="post" onsubmit="event.preventDefault(); newItemForm()">
                             {{ csrf_field() }}
-                            <div id="itemForm">
-                                <div class="form-group">
-                                    <label for="title">Name or Title</label>
-                                    <input type="text" name="title" id="title" value="{{ old('title') }}" class="form-control" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="description">Description</label>
-                                    <textarea name="description" id="description" class="form-control" required>{{ old('description') }}</textarea>
-                                </div>
+                            <div class="form-group">
+                                <label for="title">Name or Title</label>
+                                <input type="text" name="title" id="title" value="{{ old('title') }}" class="form-control">
                             </div>
-                            <div id="photoForm" class="hidden">
-                                <div id="photo-preview"></div>
-                                <div id="photo-zone" class="photo-dropzone">
-                                    Drag and drop or click here to add photos
-                                    <input type="file" id="photo-upload" class="hidden">
-                                </div>
+                            <div class="form-group">
+                                <label for="description">Description</label>
+                                <textarea name="description" id="description" class="form-control">{{ old('description') }}</textarea>
                             </div>
-                            <div class="text-right">
-                                <button type="reset" class="btn btn-default">Reset</button>
-                                <button type="button" id="addPhotoBtn" onclick="showPhotoForm()" hidden="false" class="btn btn-warning">Add Photos</button>
-                                <button type="button" id="addItemBtn" onclick="showItemForm()" hidden="true" class="hidden">Back To Item</button>
-                                <button type="submit" class="btn btn-success">Add Item</button>
+                            <div id="actions">
+                                <span class="btn btn-success fileinput-button">
+                                    <i class="glyphicon glyphicon-plus"></i>
+                                    <span>Add Photos</span>
+                                </span>
+                                <div class="pull-right">
+                                    <button type="reset" class="btn btn-default">Reset</button>
+                                    <button type="submit" class="btn btn-success">Add Item</button>
+                                </div>
+                                <div id="previews" class="row" style="margin-top:20px;">
+                                    <div id="template">
+                                        <div class="col-sm-4 col-md-2">
+                                            <div class="thumbnail text-center">
+                                                <span class="preview"><img data-dz-thumbnail></span>
+                                                <div class="caption text-center">
+                                                    <button data-dz-remove class="btn btn-danger btn-sm delete">
+                                                        <i class="glyphicon glyphicon-trash"></i>
+                                                        <span>Delete</span>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </form>
                     </div>
                 </div>
             </section>
-            <section class="col-xs-12 col-sm-6">
-            <div class="box box-info">
-                <div class="box-header">
-                    <h3 class="box-title">
-                        Current Market Items
-                    </h3>
-                    <div class="pull-right box-tools">
-                        <a role="button" class="text-primary" data-toggle="modal" data-target="#marketItemHelp">
-                            <i class="fa fa-question-circle fa-2x"></i>
-                        </a>
+            <section id="listItems" class="col-xs-12 col-sm-6">
+                <div class="box box-info">
+                    <div class="box-header">
+                        <h3 class="box-title">
+                            Current Market Items
+                        </h3>
+                        <div class="pull-right box-tools">
+                            <a role="button" class="text-primary" data-toggle="modal" data-target="#marketItemHelp">
+                                <i class="fa fa-question-circle fa-2x"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <!-- /.box-header -->
+                    <div class="box-body pad">
                     </div>
                 </div>
-                <!-- /.box-header -->
-                <div class="box-body pad">
-
-                </div>
-            </div>
-        </section>
+            </section>
         </div>
     </section>
 @endsection
 
 @section('scripts')
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/4.2.0/dropzone.js"></script>
     <script>
-        var photoZone = document.getElementById('photo-zone');
-        var photoUpload = document.getElementById('photo-upload');
-        var photoPreview = document.getElementById('photo-preview');
-        var that = this;
-        photoZone.addEventListener('click', function() {
-            photoUpload.click();
+        var previewNode = document.querySelector("#template");
+        previewNode.id = "";
+        var previewTemplate = previewNode.parentNode.innerHTML;
+        previewNode.parentNode.removeChild(previewNode);
+        var myDropzone = new Dropzone(document.body, {
+          url: "/admin/market/item/image/store", 
+          thumbnailWidth: 80,
+          thumbnailHeight: 80,
+          parallelUploads: 20,
+          previewTemplate: previewTemplate,
+          autoQueue: false, 
+          previewsContainer: "#previews", 
+          clickable: ".fileinput-button" 
         });
-        photoZone.addEventListener('mouseover', function() {
-            photoZone.className = 'photo-dropzone dragover';
-        });
-        photoZone.addEventListener('mouseleave', function() {
-            photoZone.className = 'photo-dropzone';
-        });
-        photoZone.addEventListener('dragover', function(event) {
-            event.preventDefault();
-            photoZone.className = 'photo-dropzone dragover';
-        });
-        photoZone.addEventListener('dragleave', function() {
-            photoZone.className = 'photo-dropzone';
-        });
-        photoZone.addEventListener('drop', function(event) {
-            event.preventDefault();
-            if (event.dataTransfer.files) {
-                console.log(event.dataTransfer.files[0]);
-                for(i = 0; i < event.dataTransfer.files.length; ++i) {
-                    var reader = new FileReader();
-                    reader.onload = function() {
-                        var img = document.createElement('img');
-                        img.src = reader.result;
-                        photoPreview.appendChild(img);
-                    }
-                    reader.readAsDataURL(event.dataTransfer.files[0]);
-                }
-            }
-        });
-        function showPhotoForm() {
-            document.getElementById('itemForm').className = 'hidden';
-            document.getElementById('photoForm').className = '';
-            document.getElementById('addPhotoBtn').className = 'hidden';
-            document.getElementById('addItemBtn').className = 'btn btn-danger';
+        function newItemForm() {
+            myDropzone.enqueueFiles(myDropzone.getFilesWithStatus(Dropzone.ADDED));
+            document.getElementById('form').submit();
         };
-        function showItemForm() {
-            document.getElementById('itemForm').className = '';
-            document.getElementById('photoForm').className = 'hidden';
-            document.getElementById('addPhotoBtn').className = 'btn btn-warning';
-            document.getElementById('addItemBtn').className = 'hidden';
-        };
-        function readURL(input) {
-            if (input.files && input.files[0]) {
-                var photoPreview = document.getElementById('photo-preview');
-                var reader = new FileReader();
-                reader.onload = function (e) {
-                    var img = document.createElement('img');
-                    img.src = e.target.result;
-                    photoPreview.appendChild(img);
-                }
-                reader.readAsDataURL(input.files[0]);
-            }
-        }
     </script>
 @endsection

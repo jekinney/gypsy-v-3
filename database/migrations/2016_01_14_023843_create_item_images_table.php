@@ -14,8 +14,9 @@ class CreateItemImagesTable extends Migration
     {
         Schema::create('item_images', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('item_id')->unsigned();
-            $table->string('path');
+            $table->integer('item_id')->unsigned()->default(0);
+            $table->string('thumbnail');
+            $table->string('large');
             $table->integer('order');
             $table->boolean('main')->default(0);
             $table->timestamps();
