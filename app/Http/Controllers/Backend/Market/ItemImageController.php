@@ -18,6 +18,11 @@ class ItemImageController extends Controller
 
     public function store(Request $request)
     {
-    	$this->itemImage->tempFileUpload($request);
+    	$this->itemImage->onItemCreate($request);
+    }
+
+    public function update(Request $request)
+    {
+    	$this->itemImage->onItemUpdate($request);
     }
 }

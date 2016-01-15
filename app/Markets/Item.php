@@ -22,14 +22,38 @@ class Item extends Model
 
     public function allWithImagesPaginated($limit = 10)
     {
-        return $this->with('images')->get();
+        return $this->with('images')->paginate($limit);
+    }
+
+    public function findByIdWithImages($id)
+    {
+        return $this->with('images')->find($id);
+    }
+
+    public function findBySlugWithImages($slug)
+    {
+        return $this->with('images')->where('slug', $slug)->first();
     }
 
     public function addNew($request)
     {
-        sleep(10);
-        $item = $this->create($request->all());
+        $item = $this->create([
+            'slug' => str_slug($request->title),
+            'title' => $request->title,
+            'description' => $request->description
+        ]);
         $this->temporaryPhotoCheck($item);
+        return $item;
+    }
+
+    public function submitUpdate($request)
+    {
+        $item = $this->find($request->id);
+        $item->update([
+            'slug' => str_slug($request->title),
+            'title' => $request->title,
+            'description' => $request->description
+        ]);
         return $item;
     }
 

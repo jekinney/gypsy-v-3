@@ -18,9 +18,16 @@ class ItemController extends Controller
 
     public function index()
     {
-    	$types = $this->item->allWithImagesPaginated();
+    	$items = $this->item->allWithImagesPaginated();
 
     	return view('backend.market.item.index', compact('items'));
+    }
+
+    public function edit($id)
+    {
+        $item = $this->item->findByIdWithImages($id);
+
+        return view('backend.market.item.edit', compact('item'));
     }
 
     public function store(Request $request)

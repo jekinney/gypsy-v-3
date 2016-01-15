@@ -139,6 +139,37 @@
                         </div>
                     </div>
                     <div class="box-body pad">
+                        @foreach($items as $item)
+                            <div class="media">
+                                <div class="media-left">
+                                    <a href="{{ route('admin.market.item.edit', $item->id) }}">
+                                        @if($item->images->count())
+                                            @if($item->images()->where('main', 1)->first())
+                                                <img 
+                                                    class="media-object" 
+                                                    src="{{ asset($item->images()->where('main', 1)->first()->thumbnail) }}" 
+                                                    alt="{{ $item->title }}" height="100px" width="100px"
+                                                >
+                                            @else
+                                                <img 
+                                                    class="media-object" 
+                                                    src="{{ asset($item->images()->first()->thumbnail) }}" 
+                                                    alt="{{ $item->title }}" height="100px" width="100px"
+                                                >
+                                            @endif
+                                        @else
+                                            <img class="media-object" src="http://dummyimage.com/100/000/fff.png&text=No+Image" >
+                                        @endif
+                                    </a>
+                                </div>
+                                <div class="media-body">
+                                    <h4 class="media-heading">{{ $item->title }}</h4>
+                                    {!! $item->description !!}
+                                    <p>Photo Count: {{ $item->images->count() }}</p>
+                                </div>
+                            </div>
+                        @endforeach
+                        {!! $items->links() !!}
                     </div>
                 </div>
             </aside>
