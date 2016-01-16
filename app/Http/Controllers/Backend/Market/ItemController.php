@@ -3,15 +3,15 @@
 namespace App\Http\Controllers\Backend\Market;
 
 use Illuminate\Http\Request;
-use App\Markets\Item;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\Markets\Repository\ItemRepository;
 
 class ItemController extends Controller
 {
      protected $item;
 
-    function __construct(Item $item)
+    function __construct(ItemRepository $item)
     {
     	$this->item = $item;
     }

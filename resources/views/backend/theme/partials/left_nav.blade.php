@@ -18,6 +18,7 @@
                     <li><a href="{{ route('admin.blog.article.unpublished.list') }}"><i class="fa fa-circle-o"></i> Unpublished/Draft Articles</a></li>
                     <li><a href="{{ route('admin.blog.article.published.list') }}"><i class="fa fa-circle-o"></i> Published Articles</a></li>
                     <li><a href="{{ route('admin.blog.category.list') }}"><i class="fa fa-circle-o"></i> Manage Categories</a></li>
+                    <li><a href="{{ route('admin.blog.image.index') }}"><i class="fa fa-circle-o"></i> Manage Article Images</a></li>
                 </ul>
             </li>
             <li class="treeview {{ Request::segment(2) === 'market' ? 'active' : '' }}">

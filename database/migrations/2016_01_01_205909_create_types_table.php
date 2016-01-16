@@ -12,7 +12,7 @@ class CreateTypesTable extends Migration
      */
     public function up()
     {
-        Schema::create('types', function (Blueprint $table) {
+        Schema::create('market_types', function (Blueprint $table) {
             $table->increments('id');
             $table->string('image', 120);
             $table->string('title', 120);
@@ -30,6 +30,6 @@ class CreateTypesTable extends Migration
      */
     public function down()
     {
-        Schema::drop('types');
+        Schema::drop('market_types');
     }
 }

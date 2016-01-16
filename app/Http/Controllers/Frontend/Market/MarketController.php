@@ -2,15 +2,15 @@
 
 namespace App\Http\Controllers\Frontend\Market;
 
-use App\Markets\Market;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Markets\Repository\MarketRepository;
 
 class MarketController extends Controller
 {
     protected $market;
 
-    function __construct(Market $market)
+    function __construct(MarketRepository $market)
     {
     	$this->market = $market;
     }

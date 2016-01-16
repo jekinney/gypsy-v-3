@@ -2,7 +2,7 @@
 
 namespace App\Http\ViewComposers\Blog;
 
-use App\Blog\Category;
+use App\Blog\Repository\CategoryRepository;
 use Illuminate\View\View;
 
 class CategoryComposer
@@ -20,7 +20,7 @@ class CategoryComposer
      * @param  Category  $category
      * @return void
      */
-    public function __construct(Category $category)
+    public function __construct(CategoryRepository $category)
     {
         $this->category = $category;
     }

@@ -2,7 +2,7 @@
 
 namespace App\Http\ViewComposers\Blog;
 
-use App\Blog\Article;
+use App\Blog\Repository\ArticleRepository;
 use Illuminate\View\View;
 
 class ArticleComposer
@@ -20,7 +20,7 @@ class ArticleComposer
      * @param  Article  $article
      * @return void
      */
-    public function __construct(Article $article)
+    public function __construct(ArticleRepository $article)
     {
         $this->article = $article;
     }

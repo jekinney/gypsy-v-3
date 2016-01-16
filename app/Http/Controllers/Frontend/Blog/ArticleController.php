@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers\Frontend\Blog;
 
-use App\Blog\Article;
 use App\Http\Controllers\Controller;
+use App\Blog\Repository\ArticleRepository;
 
 class ArticleController extends Controller
 {
 	protected $article;
 
-	function __construct(Article $article)
+	function __construct(ArticleRepository $article)
 	{
 		$this->article = $article;
 	}

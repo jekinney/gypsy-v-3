@@ -3,16 +3,16 @@
 namespace App\Http\Controllers\Backend\Market;
 
 use Illuminate\Http\Request;
-use App\Markets\Type;
+use App\Http\Controllers\Controller;
+use App\Markets\Repository\TypeRepository;
 use App\Http\Requests\Markets\Type\CreateForm;
 use App\Http\Requests\Markets\Type\UpdateForm;
-use App\Http\Controllers\Controller;
 
 class TypeController extends Controller
 {
     protected $type;
 
-    function __construct(Type $type)
+    function __construct(TypeRepository $type)
     {
     	$this->type = $type;
     }

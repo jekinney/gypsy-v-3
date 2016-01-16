@@ -3,41 +3,43 @@
 namespace App\Http\Controllers\Backend\Market;
 
 use Illuminate\Http\Request;
-
-use App\Markets\Item;
-use App\Markets\Type;
-use App\Markets\Market;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\Markets\Repository\ItemRepository;
+use App\Markets\Repository\TypeRepository;
+use App\Markets\Repository\MarketRepository;
 
 class MarketController extends Controller
 {
     protected $market;
 
-    function __construct(Market $market)
+    protected $type;
+
+    function __construct(MarketRepository $market, TypeRepository $type)
     {
         $this->market = $market;
+        $this->type = $type;
     }
 
     public function index()
     {
-        $markets = $this->market->AllWithTypeAndTimes();
+        $markets = $this->market->allWithTypeAndTimes();
 
     	return view('backend.market.index', compact('markets'));
     }
 
-    public function create(Type $type, Item $item)
+    public function create(ItemRepository $item)
     {
-        $types = $type->selectList();
+        $types = $this->type->selectList();
         $items = $item->allWithImagesPaginated();
 
     	return view('backend.market.create', compact('types', 'items'));
     }
 
-    public function edit($id, Type $type)
+    public function edit($id)
     {
         $market = $this->market->findById($id);
-        $types  = $type->selectList();
+        $types  = $this->type->selectList();
 
     	return view('backend.market.edit', compact('market', 'types'));
     }

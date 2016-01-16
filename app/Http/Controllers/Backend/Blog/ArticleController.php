@@ -4,33 +4,43 @@ namespace App\Http\Controllers\Backend\Blog;
 
 use Illuminate\Http\Request;
 
-use App\Blog\Article;
-use App\Blog\Category;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\Blog\Repository\ImageRepository;
+use App\Blog\Repository\ArticleRepository;
+use App\Blog\Repository\CategoryRepository;
 
 class ArticleController extends Controller
 {
 	protected $article;
 
-	function __construct(Article $article)
+    protected $category;
+
+    protected $image;
+
+	function __construct(ArticleRepository $article, CategoryRepository $category, ImageRepository $image)
 	{
 		$this->article = $article;
+        $this->category = $category;
+        $this->image = $image;
 	}
 	
-    public function create(Category $category)
+    public function create()
     {
-    	$categories = $category->selectList();
+    	$categories = $this->category->selectList();
+        $images = $this->image->paginatedList(3);
 
-    	return view('backend.blog.article.create', compact('categories'));
+    	return view('backend.blog.article.create', compact('categories', 'images'));
     }
 
-    public function edit($id, Category $category)
+    public function edit($id)
     {
     	$article = $this->article->findById($id);
-    	$categories = $category->selectList();
+    	$categories = $this->category->selectList();
+        $images = $this->image->paginatedList(3);
 
-    	return view('backend.blog.article.edit', compact('article', 'categories'));
+
+    	return view('backend.blog.article.edit', compact('article', 'categories', 'images'));
     }
 
     public function unpublishedList()

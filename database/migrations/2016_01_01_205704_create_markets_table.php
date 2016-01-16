@@ -12,7 +12,7 @@ class CreateMarketsTable extends Migration
      */
     public function up()
     {
-        Schema::create('markets', function (Blueprint $table) {
+        Schema::create('market_markets', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('type_id')->unsigned()->index();
             $table->string('title', 120);
@@ -31,6 +31,6 @@ class CreateMarketsTable extends Migration
      */
     public function down()
     {
-        Schema::drop('markets');
+        Schema::drop('market_markets');
     }
 }

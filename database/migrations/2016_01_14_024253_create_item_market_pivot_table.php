@@ -17,8 +17,8 @@ class CreateItemMarketPivotTable extends Migration
             $table->integer('item_id')->unsigned();
             $table->integer('market_id')->unsigned();
 
-            $table->foreign('item_id')->references('id')->on('items')->onDelete('cascade');
-            $table->foreign('market_id')->references('id')->on('markets')->onDelete('cascade');
+            $table->foreign('item_id')->references('id')->on('market_items')->onDelete('cascade');
+            $table->foreign('market_id')->references('id')->on('market_markets')->onDelete('cascade');
         });
     }
 

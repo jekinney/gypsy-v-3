@@ -24,7 +24,7 @@ $factory->define(App\Blog\Category::class, function (Faker\Generator $faker) {
 	$title = $faker->sentence;
     return [
         'title' => $title,
-        'slug' => $title,
+        'slug' => str_slug($title),
         'description' => $faker->sentence
     ];
 });
@@ -38,7 +38,7 @@ $factory->define(App\Blog\Article::class, function (Faker\Generator $faker) {
     	'category_id' => $categories->random(1)->id,
     	'header_image' => $faker->imageUrl(1200, 300),
         'title' => $title,
-        'slug' => $title,
+        'slug' => str_slug($title),
         'snippet' => $faker->sentence,
         'body' => $faker->paragraph,
         'publish_at' => $faker->dateTimeThisMonth(),

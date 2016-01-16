@@ -112,6 +112,18 @@
 		                </h3>
 		            </div>
 		            <div class="box-body pad">
+		            	@foreach($images as $image)
+							<div class="thumbnail">
+      							<img src="{{ asset($image->thumbnail) }}" alt="...">
+      							<div class="caption">
+      								<textarea id="holdtext{{ $image-> id }}" class="hidden">{{ asset($image->original) }}</textarea>
+									<button onClick="ClipBoard({{ $image->id }});">Copy Path</button>
+        						</div>
+    						</div>
+		            	@endforeach
+		            	<div class="text-center">
+		            		{{ $images->links() }}
+		            	</div>
 		            </div>
 		        </div>
 		    </aside>
@@ -143,8 +155,13 @@
             CKEDITOR.replace('body');
         });
         $('input[type="checkbox"].flat-red').iCheck({
-                checkboxClass: 'icheckbox_square',
-                increaseArea: '20%' 
-            });
+            checkboxClass: 'icheckbox_square',
+            increaseArea: '20%' 
+        });
+        function ClipBoard(id) {
+        	var text = document.getElementById('holdtext'+id);
+        	text.select();
+			document.execCommand('Copy');
+		};
     </script>
 @endsection

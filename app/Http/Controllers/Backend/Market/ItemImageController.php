@@ -3,15 +3,14 @@
 namespace App\Http\Controllers\Backend\Market;
 
 use Illuminate\Http\Request;
-use App\Markets\ItemImage;
-use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\Markets\Repository\ItemImageRepository;
 
 class ItemImageController extends Controller
 {
 	protected $itemImage;
 
-	function __construct(ItemImage $itemImage)
+	function __construct(ItemImageRepository $itemImage)
 	{
 		$this->itemImage = $itemImage;
 	}

@@ -12,7 +12,7 @@ class CreateItemsTable extends Migration
      */
     public function up()
     {
-        Schema::create('items', function (Blueprint $table) {
+        Schema::create('market_items', function (Blueprint $table) {
             $table->increments('id');
             $table->string('slug', 120);
             $table->string('title', 120);
@@ -28,6 +28,6 @@ class CreateItemsTable extends Migration
      */
     public function down()
     {
-        Schema::drop('items');
+        Schema::drop('market_items');
     }
 }

@@ -9,6 +9,7 @@
 | kernel and includes session state, CSRF protection, and more.
 |
 */
+Route::post('/admin/blog/image/store', ['uses'=>'Backend\Blog\ImageController@store']);
 Route::group(['prefix' => '/admin/market/item/image'], function() {
     Route::post('store', ['as' => 'store', 'uses' => 'Backend\Market\ItemImageController@store']);
 });
@@ -51,6 +52,11 @@ Route::group(['middleware' => ['web']], function () {
                 Route::post('store', ['as'=>'store', 'uses'=>'CategoryController@store']);
                 Route::put('update', ['as'=>'update', 'uses'=>'CategoryController@update']);
                 Route::delete('remove/{id}', ['as'=>'remove', 'uses'=>'CategoryController@remove']);
+            });
+             Route::group(['prefix' => 'image', 'as'=>'image.'], function() {
+                Route::get('index', ['as' => 'index', 'uses'=>'ImageController@index']);
+                Route::put('update', ['as' => 'update', 'uses' => 'ImageController@update']);
+                Route::delete('remove', ['as'=>'remove', 'uses'=>'ImageController@remove']);
             });
         });
 

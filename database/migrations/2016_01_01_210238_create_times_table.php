@@ -12,7 +12,7 @@ class CreateTimesTable extends Migration
      */
     public function up()
     {
-        Schema::create('times', function (Blueprint $table) {
+        Schema::create('market_times', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('market_id')->unsigned()->index();
             $table->timestamp('start');
@@ -28,6 +28,6 @@ class CreateTimesTable extends Migration
      */
     public function down()
     {
-        Schema::drop('times');
+        Schema::drop('market_times');
     }
 }

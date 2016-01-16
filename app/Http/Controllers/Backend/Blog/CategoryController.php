@@ -2,9 +2,8 @@
 
 namespace App\Http\Controllers\Backend\Blog;
 
-use Illuminate\Http\Request;
-use App\Blog\Category;
 use App\Http\Controllers\Controller;
+use App\Blog\Repository\CategoryRepository;
 use App\Http\Requests\Blog\Category\CreateForm;
 use App\Http\Requests\Blog\Category\UpdateForm;
 
@@ -13,7 +12,7 @@ class CategoryController extends Controller
 
 	protected $category;
 
-	function __construct(Category $category)
+	function __construct(CategoryRepository $category)
 	{
 		$this->category = $category;
 	}
