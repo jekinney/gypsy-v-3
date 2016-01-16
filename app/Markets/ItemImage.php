@@ -41,6 +41,25 @@ class ItemImage extends Model
         ]);
     }
 
+    public function remove($request)
+    {
+        $image = $this->find($request->id);
+        unlink(public_path().$image->thumbnail);
+        unlink(public_path().$image->large);
+        $image->delete();
+    }
+
+    public function main($request)
+    {
+        $image = $this->find($request->id);
+        $main  = $this->where('item_id', $image->item_id)->where('main', 1)->first();
+        if($main)
+        {
+            $main->update(['main' => 0]);
+        }
+        $image->update(['main' => 1]);
+    }
+
     protected function fileUpload($request)
     {
         $file = $request->file('file');

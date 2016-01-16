@@ -37,16 +37,16 @@ class ItemController extends Controller
     	return back();
     }
 
-    public function update(UpdateForm $request)
+    public function update(Request $request)
     {	
     	$this->item->submitUpdate($request);
 
     	return back();
     }
 
-    public function remove($id)
+    public function remove(Request $request)
     {
-    	$this->item->remove($id);
+    	$this->item->remove($request);
 
     	return back();
     }

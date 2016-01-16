@@ -14,16 +14,19 @@
     </section>
     <section class="content">
         <div class="row">
-            <section id="createItem" class="col-xs-12 col-sm-6">
+            <section id="createItem" class="col-xs-12">
                 <div class="box box-success">
                     <div class="box-header">
                         <h3 class="box-title">
                             Create New Market Items
                         </h3>
                         <div class="pull-right box-tools">
-                            <a role="button" class="text-success" data-toggle="modal" data-target="#marketItemHelp">
+                            <a role="button" class="btn text-success" data-toggle="modal" data-target="#itemFormHelp">
                                 <i class="fa fa-question-circle fa-2x"></i>
                             </a>
+                            <button type="button" class="btn btn-success btn-sm" data-widget="collapse" data-toggle="tooltip" title="" data-original-title="Collapse">
+                                <i class="fa fa-plus"></i>
+                            </button>
                         </div>
                     </div>
                     <div class="box-body pad">
@@ -34,13 +37,15 @@
                         </span>
                         <form action="{{ route('admin.market.item.store') }}" id="form" method="post" onsubmit="event.preventDefault(); newItemForm()">
                             {{ csrf_field() }}
-                            <div class="form-group">
-                                <label for="title">Name or Title</label>
-                                <input type="text" name="title" id="title" value="{{ old('title') }}" class="form-control">
-                            </div>
-                            <div class="form-group">
-                                <label for="description">Description</label>
-                                <textarea name="description" id="description" class="form-control">{{ old('description') }}</textarea>
+                            <div class="row">
+                                <div class="form-group col-xs-12 col-sm-6">
+                                    <label for="title">Name or Title</label>
+                                    <input type="text" name="title" id="title" value="{{ old('title') }}" class="form-control">
+                                </div>
+                                <div class="form-group col-xs-12 col-sm-6">
+                                    <label for="description">Description</label>
+                                    <textarea name="description" id="description" class="form-control">{{ old('description') }}</textarea>
+                                </div>
                             </div>
                             <div id="actions">
                                 <span class="btn btn-success fileinput-button">
@@ -71,58 +76,59 @@
                     </div>
                 </div>
             </section>
-            <section id="listItems" class="col-xs-12 col-sm-6">
+            <section id="listItems" class="col-xs-12">
                 <div class="box box-info">
                     <div class="box-header">
                         <h3 class="box-title">
                             Current Market Items
                         </h3>
-                        <div class="pull-right box-tools">
-                            <a role="button" class="text-primary" data-toggle="modal" data-target="#marketItemHelp">
-                                <i class="fa fa-question-circle fa-2x"></i>
-                            </a>
-                        </div>
                     </div>
                     <!-- /.box-header -->
                     <div class="box-body pad">
-                        @foreach($items as $item)
-                            <div class="media">
-                                <div class="media-left">
-                                    <a href="{{ route('admin.market.item.edit', $item->id) }}">
-                                        @if($item->images->count())
-                                            @if($item->images()->where('main', 1)->first())
-                                                <img 
-                                                    class="media-object" 
-                                                    src="{{ asset($item->images()->where('main', 1)->first()->thumbnail) }}" 
-                                                    alt="{{ $item->title }}" height="100px" width="100px"
-                                                >
-                                            @else
-                                                <img 
-                                                    class="media-object" 
-                                                    src="{{ asset($item->images()->first()->thumbnail) }}" 
-                                                    alt="{{ $item->title }}" height="100px" width="100px"
-                                                >
-                                            @endif
-                                        @else
-                                            <img class="media-object" src="http://dummyimage.com/100/000/fff.png&text=No+Image" >
-                                        @endif
-                                    </a>
-                                </div>
-                                <div class="media-body">
-                                    <h4 class="media-heading">
-                                        {{ $item->title }}
-                                        <div class="btn-group pull-right">
-                                            <a href="{{ route('admin.market.item.edit', $item->id) }}" class="btn btn-primary btn-sm">
-                                                <i class="fa fa-gear"></i>
+                        @foreach($items->chunk(3) as $chunk)
+                            <div class="row">
+                                @foreach($chunk as $item)
+                                    <div class="col-sm-4 col-md-2">
+                                        <div class="thumbnail">
+                                            <a href="{{ route('admin.market.item.edit', $item->id) }}">
+                                                @if($item->images->count())
+                                                    @if($item->images()->where('main', 1)->first())
+                                                        <img 
+                                                            class="media-object" 
+                                                            src="{{ asset($item->images()->where('main', 1)->first()->thumbnail) }}" 
+                                                            alt="{{ $item->title }}" height="200px" width="200px"
+                                                        >
+                                                    @else
+                                                        <img 
+                                                            class="media-object" 
+                                                            src="{{ asset($item->images()->first()->thumbnail) }}" 
+                                                            alt="{{ $item->title }}" height="200px" width="200px"
+                                                        >
+                                                    @endif
+                                                @else
+                                                    <img class="media-object" src="http://dummyimage.com/100/000/fff.png&text=No+Image" >
+                                                @endif
                                             </a>
-                                            <button type="submit" class="btn btn-danger btn-sm">
-                                                <i class="fa fa-trash"></i>
-                                            </button>
+                                            <div class="caption text-center">
+                                                <h4>{{ $item->title }}</h4>
+                                                <p>Photo Count: {{ $item->images->count() }}</p>
+                                                <form action="{{ route('admin.market.item.remove') }}" method="post">
+                                                    <input type="hidden" name="_method" value="delete">
+                                                    <input type="hidden" name="id" value="{{ $item->id }}">
+                                                    {{ csrf_field() }}
+                                                    <div class="btn-group">
+                                                        <a href="{{ route('admin.market.item.edit', $item->id) }}" class="btn btn-primary btn-sm">
+                                                            <i class="fa fa-gear"></i>
+                                                        </a>
+                                                        <button type="submit" class="btn btn-danger btn-sm">
+                                                            <i class="fa fa-trash"></i>
+                                                        </button>
+                                                    </div>
+                                                </form>
+                                            </div>
                                         </div>
-                                    </h4>
-                                    {!! $item->description !!}
-                                    <p>Photo Count: {{ $item->images->count() }}</p>
-                                </div>
+                                    </div>
+                                @endforeach
                             </div>
                         @endforeach
                         {!! $items->links() !!}
@@ -131,39 +137,9 @@
             </section>
         </div>
     </section>
+    @include('backend.market.modals.item_new_form_help')
 @endsection
 
 @section('scripts')
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/4.2.0/dropzone.js"></script>
-    <script>
-        var previewNode = document.querySelector("#template");
-        previewNode.id = '';
-        var previewTemplate = previewNode.parentNode.innerHTML;
-        previewNode.parentNode.removeChild(previewNode);
-        var myDropzone = new Dropzone(document.body, {
-          url: '/admin/market/item/image/store', 
-          thumbnailWidth: 80,
-          thumbnailHeight: 80,
-          parallelUploads: 20,
-          previewTemplate: previewTemplate,
-          autoQueue: false, 
-          previewsContainer: '#previews', 
-          clickable: '.fileinput-button' 
-        });
-        function newItemForm() {
-            myDropzone.enqueueFiles(myDropzone.getFilesWithStatus(Dropzone.ADDED));
-            myDropzone.on('sending', function(file) {
-                document.querySelector('#total-progress').style.opacity = '1';
-                document.querySelector(".start").setAttribute('disabled', 'disabled');
-            });
-             myDropzone.on('totaluploadprogress', function(progress) {
-                document.querySelector('#total-progress .progress-bar').style.width = progress + '%';
-            });
-            myDropzone.on('queuecomplete', function(progress) {
-                document.querySelector('#total-progress').style.opacity = '0';
-                myDropzone.enqueueFiles(myDropzone.getFilesWithStatus(Dropzone.ADDED));
-                document.getElementById('form').submit();
-            });
-        };
-    </script>
+    <script src="{{ asset('backend/js/marketItem.js') }}"></script>
 @endsection

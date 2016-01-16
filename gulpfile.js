@@ -48,6 +48,11 @@ elixir(function(mix) {
         '../backend/js/app.js',
         '../backend/js/timepicker/bootstrap-timepicker.js',
         ], 'public/backend/js/main.js');
+
+    mix.scripts([
+        'dropzone.js',
+        '../backend/js/marketItemDropzone.js',
+        ], 'public/backend/js/marketItem.js');
     
     mix.version(['backend/css/main.css', 'backend/js/main.js']);
 });

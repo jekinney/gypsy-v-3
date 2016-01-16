@@ -54,7 +54,24 @@ class Item extends Model
             'title' => $request->title,
             'description' => $request->description
         ]);
+         $this->temporaryPhotoCheck($item);
         return $item;
+    }
+
+    public function remove($request)
+    {
+        $item = $this->with('images')->find($request->id);
+        if($item->images->count() > 0)
+        {
+            foreach($item->images as $image)
+            {
+                unlink(public_path().$image->thumbnail);
+                unlink(public_path().$image->large);
+                $image->delete();
+            }
+        }
+        $item->delete();
+
     }
 
     protected function temporaryPhotoCheck($item)

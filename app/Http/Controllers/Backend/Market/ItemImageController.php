@@ -21,8 +21,17 @@ class ItemImageController extends Controller
     	$this->itemImage->onItemCreate($request);
     }
 
-    public function update(Request $request)
+    public function main(Request $request)
     {
-    	$this->itemImage->onItemUpdate($request);
+        $this->itemImage->main($request);
+
+        return back();
+    }
+
+    public function remove(Request $request)
+    {
+        $this->itemImage->remove($request);
+
+        return back();
     }
 }

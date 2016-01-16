@@ -73,7 +73,12 @@ Route::group(['middleware' => ['web']], function () {
                 Route::get('edit/{id}', ['as'=>'edit', 'uses'=>'ItemController@edit']);
                 Route::post('store', ['as'=>'store', 'uses'=>'ItemController@store']);
                 Route::put('update', ['as'=>'update', 'uses'=>'ItemController@update']);
-                Route::delete('remove/{id}', ['as'=>'remove', 'uses'=>'ItemController@remove']);
+                Route::delete('remove', ['as'=>'remove', 'uses'=>'ItemController@remove']);
+            });
+
+            Route::group(['prefix' => 'image', 'as' => 'image.'], function() {
+                Route::post('main', ['as' => 'main', 'uses' => 'ItemImageController@main']);
+                Route::delete('remove', ['as' => 'remove', 'uses' => 'ItemImageController@remove']);
             });
         });
     });
