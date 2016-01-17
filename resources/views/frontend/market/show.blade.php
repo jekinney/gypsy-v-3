@@ -14,7 +14,7 @@
 				<li><b>Ends: {{ $market->end_at->format('l jS \\of F Y') }}</b></li>
 				<li><b>Lasts for: {{ $market->times->count() }} Days</b></li>
 			</ul>
-			<p>{{ $market->description }}</p>
+			{!! $market->description !!}
 			<ul class="list-unstyled">
 				@foreach($market->times as $time)
 					<li>

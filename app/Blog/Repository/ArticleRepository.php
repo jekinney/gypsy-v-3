@@ -109,7 +109,7 @@ class ArticleRepository
     public function addNew($request)
     {
         $header = $this->uploadHeaderImage($request);
-        return $this->create([
+        return $this->article->create([
             'user_id'     => 1,
             'category_id' => $request->category_id,
             'header_image'=> $header,
@@ -124,7 +124,7 @@ class ArticleRepository
 
     public function submitUpdate($request)
     {
-        $article = $this->find($request->id);
+        $article = $this->article->find($request->id);
         $header  = $this->uploadHeaderImage($request, $article);
         $article->update([
             'user_id'     => 1,

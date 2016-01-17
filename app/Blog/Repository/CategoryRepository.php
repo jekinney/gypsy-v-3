@@ -36,7 +36,7 @@ class CategoryRepository
         return $this->category->create([
             'slug'        => str_slug($request->title), 
             'title'       => $request->title, 
-            'description' => $request->desciption,
+            'description' => $request->description,
         ]);
     }
 

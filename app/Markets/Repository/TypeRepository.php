@@ -27,7 +27,7 @@ class TypeRepository
     {
         $image = $this->uploadImage($request);
 
-        return $this->create([
+        return $this->type->create([
             'image'       => $image,
             'title'       => $request->title,
             'slug'        => str_slug($request->title),
@@ -38,7 +38,7 @@ class TypeRepository
 
     public function submitUpdate($request)
     {
-        $type  = $this->find($request->id);
+        $type  = $this->type->find($request->id);
         $image = $this->uploadImage($request, $type);
         $type->update([
             'image'       => $image,
@@ -52,7 +52,7 @@ class TypeRepository
 
     public function remove($id)
     {
-        $this->find($id)->delete();
+        $this->type->find($id)->delete();
     }
 
     protected function uploadImage($request, $type = null)

@@ -3,7 +3,7 @@
 @section('content')
 	<div class="well">
 		<header>
-			<img src="{{ $article->header_image }}" class="img-responsive">
+			<img src="{{ asset($article->header_image) }}" class="img-responsive">
 			<h2>{{ $article->title }}</h2>
 		</header>
 		<footer>

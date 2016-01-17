@@ -18,7 +18,7 @@
 										<li>Ends: {{ $market->end_at->format('l jS \\of F Y') }}</li>
 										<li>For {{ $market->times->count() }} Days</li>
 									</ul>
-									<p>{{ $market->description }}</p>
+									{!! $market->description !!}
 									<div class="text-center">
 										<a href="{{ route('market.show', $market->slug) }}" class="btn btn-primary btn-sm">More Details</a>
 									</div>

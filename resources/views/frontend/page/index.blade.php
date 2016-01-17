@@ -9,7 +9,7 @@
 			<div class="col-xs-12 col-sm-4">
 				<div class="thumbnail">
 					<header>
-						<img src="{{ $market->type->image }}" class="img-responsive">
+						<img src="{{ asset($market->type->image) }}" class="img-responsive">
 					</header>
 					<article class="caption">
 						<h2 class="text-center">{{ $market->type->title }}</h2>
@@ -18,7 +18,7 @@
 							<li>Ends: {{ $market->end_at->format('l jS \\of F Y') }}</li>
 							<li>For {{ $market->times->count() }} Days</li>
 						</ul>
-						<p>{{ $market->description }}</p>
+						{!! $market->description !!}
 						<div class="text-center">
 							<a href="{{ route('market.show', $market->slug) }}" class="btn btn-primary btn-sm">More Details</a>
 						</div>
@@ -35,7 +35,7 @@
 				<div class="col-xs-12 col-sm-6">
 					<div class="thumbnail">
 						<header>
-							<img src="{{ $article->header_image }}" class="img-responsive" alt="{{ $article->title }}">
+							<img src="{{ asset($article->header_image) }}" class="img-responsive" alt="{{ $article->title }}">
 							<h2>{{ $article->title }}</h2>
 						</header>
 						<article class="caption">
