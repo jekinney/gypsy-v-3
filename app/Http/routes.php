@@ -15,16 +15,17 @@ Route::group(['prefix' => '/admin/market/item/image'], function() {
 });
 Route::group(['middleware' => ['web']], function () {
     Route::group(['namespace' => 'Frontend'], function() {
-    	  Route::get('/', ['as'=>'home', 'uses' => 'Page\PageController@home']);
-            Route::group(['prefix' => 'market', 'as' => 'market.', 'namespace' => 'Market'], function() {
-        	  Route::get('/', ['as'=>'index', 'uses'=>'MarketController@index']);
-        	  Route::get('show/{market_slug}', ['as'=>'show', 'uses'=>'MarketController@show']);
-        	  Route::get('type/{type_slug}', ['as'=>'type', 'uses'=>'MarketController@type']);
+    	Route::get('/', ['as'=>'home', 'uses' => 'Page\PageController@home']);
+
+        Route::group(['prefix' => 'market', 'as' => 'market.', 'namespace' => 'Market'], function() {
+        	Route::get('/', ['as'=>'index', 'uses'=>'MarketController@index']);
+        	Route::get('show/{market_slug}', ['as'=>'show', 'uses'=>'MarketController@show']);
+        	Route::get('type/{type_slug}', ['as'=>'type', 'uses'=>'MarketController@type']);
         });
         Route::group(['prefix' => 'blog', 'as' => 'blog.', 'namespace' => 'Blog'], function() {
-    	      Route::get('/', ['as' => 'articles.index', 'uses'=>'ArticleController@index']);
-    	      Route::get('article/{slug}', ['as' => 'article.show', 'uses'=>'ArticleController@show']);
-    	      Route::get('categories', ['as' => 'categories.all', 'uses'=>'CategoryController@listWithCount']);
+    	   Route::get('/', ['as' => 'articles.index', 'uses'=>'ArticleController@index']);
+    	   Route::get('article/{slug}', ['as' => 'article.show', 'uses'=>'ArticleController@show']);
+    	   Route::get('categories', ['as' => 'categories.all', 'uses'=>'CategoryController@listWithCount']);
         });
         Route::group(['prefix' => 'gallery', 'as' => 'gallery.', 'namespace' => 'Gallery'], function() {
             Route::get('/', ['as' => 'index', 'uses'=>'GalleryController@index']);
@@ -32,6 +33,27 @@ Route::group(['middleware' => ['web']], function () {
         });
         Route::group(['prefix' => 'contact', 'as' => 'contact.', 'namespace' => 'Contact'], function() {
             Route::get('/', ['as' => 'index', 'uses'=>'ContactController@index']);
+        });
+
+        Route::group(['prefix' => 'auth', 'as' => 'auth.', 'namespace' => 'Auth'], function() {
+            Route::get('logout', ['as' => 'logout', 'uses' => 'AuthController@logout']);
+            Route::get('register', ['as' => 'register', 'uses' => 'AuthController@register']);
+            Route::post('login', ['as' => 'login', 'uses' => 'AuthController@login']);
+            Route::post('post/login', ['as' => 'post.register', 'uses' => 'AuthController@postRegister']);
+
+            Route::group(['prefix' => 'password', 'as' => 'password.'], function() {
+                Route::post('update', ['as' => 'update', 'uses' => 'PasswordController@update']);
+            });
+        });
+
+        Route::group(['prefix' => 'facebook', 'as' => 'facebook.', 'namespace' => 'Auth'], function() {
+            Route::get('/', ['as' => 'provider', 'uses' => 'FacebookController@provider']);
+            Route::get('callback', ['as' => 'callback', 'uses' => 'FacebookController@callback']);
+        });
+
+        Route::group(['prefix' => 'account', 'as' => 'account.', 'namespace' => 'Auth'], function() {
+            Route::get('/', ['as' => 'index', 'uses' => 'AccountController@index']);
+            Route::get('newsletter', ['as' => 'newsletter', 'uses' => 'AccountController@updateNewsletter']);
         });
     });
 

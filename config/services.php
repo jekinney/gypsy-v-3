@@ -29,10 +29,10 @@ return [
         'region' => 'us-east-1',
     ],
 
-    'stripe' => [
-        'model'  => App\User::class,
-        'key'    => env('STRIPE_KEY'),
-        'secret' => env('STRIPE_SECRET'),
+    'facebook' => [
+        'client_id' => env('FACEBOOK_CLIENT_ID'),
+        'client_secret' => env('FACEBOOK_SECRET_id'),
+        'redirect' => 'http://gypsy.app/facebook/callback',
     ],
 
 ];

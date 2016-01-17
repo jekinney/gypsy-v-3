@@ -14,7 +14,7 @@
 						type="text" 
 						name="username" 
 						id="username" 
-						value="@if(auth()->check()) auth()->user()->username @else {{ old('username') }} @endif"
+						value="@if(auth()->check()) {{ auth()->user()->username }} @else {{ old('username') }} @endif"
 						class="form-control"
 					>
 				</div>
@@ -24,7 +24,7 @@
 						type="text" 
 						name="email" 
 						id="email" 
-						value="@if(auth()->check()) auth()->user()->email @else {{ old('email') }} @endif"
+						value="@if(auth()->check()) {{ auth()->user()->email }} @else {{ old('email') }} @endif"
 						class="form-control"
 					>
 				</div>
@@ -34,7 +34,7 @@
 						type="text" 
 						name="subject" 
 						id="subject" 
-						value="@if(auth()->check()) auth()->user()->subject @else {{ old('subject') }} @endif"
+						value="{{ old('subject') }}"
 						class="form-control"
 					>
 				</div>

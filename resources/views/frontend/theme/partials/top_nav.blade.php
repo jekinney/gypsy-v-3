@@ -16,10 +16,38 @@
                 <li class="{{ Request::segment(1) === 'gallery' ? 'active' : '' }}"><a href="{{ route('gallery.index') }}">Gallery</a></li>
                 <li class="{{ Request::segment(1) === 'contact' ? 'active' : '' }}"><a href="{{ route('contact.index') }}">Contact Me</a></li>
             </ul>
-            <ul class="nav navbar-nav navbar-right">
-                <li><a href="#">Register</a></li>
-                <li><a href="#">Login</a></li>
-            </ul>
+            @if(auth()->check())
+
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="dropdown">
+                        <a href="#" 
+                            class="dropdown-toggle" 
+                            data-toggle="dropdown" 
+                            role="button" 
+                            aria-haspopup="true" 
+                            aria-expanded="false"
+                        >
+                                <img src="{{ auth()->user()->avatar }}" class="img-circle" height="25px" width="25px">
+                                {{ auth()->user()->username }}
+                                <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">Favorited Articles</a></li>
+                            <li><a href="#">Favorited Markets</a></li>
+                            <li><a href="{{ route('account.index') }}">Account</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="{{ route('auth.logout') }}">Logout</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            @else
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="{{ route('facebook.provider') }}"><i class="fa fa-facebook-official"></i> Facebook</a></li>
+                    <li><a href="{{ route('auth.register') }}">Register</a></li>
+                    <li><a role="button" data-toggle="modal" data-target="#login">Login</a></li>
+                </ul>
+                @include('frontend.auth.modals.login')
+            @endif
         </div>
     </div>
 </nav>
