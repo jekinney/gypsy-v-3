@@ -8,6 +8,15 @@
                     <h4 class="modal-title text-center" id="myModalLabel">Login</h4>
                 </div>
                 <div class="modal-body">
+                    <header class="text-center">
+                        <h2>Account Linked or you registered with Provider below, just click and go:</h2>
+                        <a href="{{ route('facebook.provider') }}" class="btn btn-primary">
+                            <i class="fa fa-facebook-official"></i> Facebook
+                        </a>
+                        <a href="{{ route('google.provider') }}" class="btn btn-danger">
+                            Google <span class="glyphicon glyphicon-plus"></span>
+                        </a>
+                    </header>
                     @include('errors.validation')
                     <div class="form-group @if($errors->has('email')) has-error @endif">
                         <label for="email">Email:</label>

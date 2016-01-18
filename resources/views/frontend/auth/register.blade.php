@@ -5,13 +5,16 @@
 		<div class="row">
 			<div class="well col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3 col-lg-4 col-lg-offset-4">
 				<header class="text-center">
-					<h2>Register with Facebook</h2>
+					<h2>Register with:</h2>
 					<a href="{{ route('facebook.provider') }}" class="btn btn-primary">
 						<i class="fa fa-facebook-official"></i> Facebook
 					</a>
+					<a href="{{ route('google.provider') }}" class="btn btn-danger">
+						Google <span class="glyphicon glyphicon-plus"></span>
+					</a>
 				</header>
 				<header class="text-center">
-					<h2>Create a new account</h2>
+					<h2>Or create a new account</h2>
 				</header>
 				<form action="" method="post">
 					{{ csrf_field() }}
