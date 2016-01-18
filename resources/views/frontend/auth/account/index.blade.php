@@ -26,10 +26,17 @@
 					  			</a>
 				  			</li>
 				  			<li class="list-group-item">
-				  				@if(auth()->user()->social_id)
+				  				@if(auth()->user()->social->where('provider', 'facebook')->first())
 				  					<span class="text-info">Facebook Linked</span>
 				  				@else 
 				  					<a href="{{ route('facebook.provider') }}" class="text-danger">Link Facebook Account</a>
+				  				@endif
+				  			</li>
+				  			<li class="list-group-item">
+				  				@if(auth()->user()->social->where('provider', 'google')->first())
+				  					<span class="text-info">Google Linked</span>
+				  				@else 
+				  					<a href="{{ route('facebook.provider') }}" class="text-danger">Link Google Account</a>
 				  				@endif
 				  			</li>
   							<li class="list-group-item">

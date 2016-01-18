@@ -41,27 +41,27 @@ class User extends Authenticatable
         return $this->attributes['password'] = bcrypt($password);
     }
 
+    public function social()
+    {
+        return $this->hasMany(SocialProvider::class);
+    }
+
     public function comments()
     {
         return $this->hasMany(Comment::class);
     }
 
-    public function socialMedia($details)
+    public function add($request)
     {
-        $check = $this->where('social_id', $details->id)->first();
-        if($check)
+        $this->username = $request->name;
+        $this->email    = $request->email;
+        if($request->has('password'))
         {
-            auth()->login($check);
-            return false;
+            $this->password = $request->password;
         }
-        $user = $this->create([
-            'username' => $details->name,
-            'email'    => $details->email,
-            'avatar'   => $details->avatar,
-            'social_id'=> $details->id,
-        ]);
-        auth()->login($user);
-        return true;       
+        $this->newsletter = $request->has('newsletter')? 1:0;
+        $this->save();
+        return auth()->login($this);      
     }
 
     public function updatePassword($request)

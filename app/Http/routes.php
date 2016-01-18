@@ -51,6 +51,11 @@ Route::group(['middleware' => ['web']], function () {
             Route::get('callback', ['as' => 'callback', 'uses' => 'FacebookController@callback']);
         });
 
+        Route::group(['prefix' => 'google', 'as' => 'google.', 'namespace' => 'Auth'], function() {
+            Route::get('/', ['as' => 'provider', 'uses' => 'GoogleController@provider']);
+            Route::get('callback', ['as' => 'callback', 'uses' => 'GoogleController@callback']);
+        });
+
         Route::group(['prefix' => 'account', 'as' => 'account.', 'namespace' => 'Auth'], function() {
             Route::get('/', ['as' => 'index', 'uses' => 'AccountController@index']);
             Route::get('newsletter', ['as' => 'newsletter', 'uses' => 'AccountController@updateNewsletter']);

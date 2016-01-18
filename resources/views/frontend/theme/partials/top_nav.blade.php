@@ -43,6 +43,7 @@
             @else
                 <ul class="nav navbar-nav navbar-right">
                     <li><a href="{{ route('facebook.provider') }}"><i class="fa fa-facebook-official"></i> Facebook</a></li>
+                    <li><a href="{{ route('google.provider') }}"><i class="fa fa-google-official"></i> Google</a></li>
                     <li><a href="{{ route('auth.register') }}">Register</a></li>
                     <li><a role="button" data-toggle="modal" data-target="#login">Login</a></li>
                 </ul>

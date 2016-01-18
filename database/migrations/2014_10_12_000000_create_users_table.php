@@ -17,7 +17,6 @@ class CreateUsersTable extends Migration
             $table->string('username');
             $table->string('email')->unique();
             $table->string('password', 60)->nullable();
-            $table->bigInteger('social_id')->nullable();
             $table->string('avatar')->defualt('none');
             $table->rememberToken();
             $table->boolean('newsletter')->default(0);

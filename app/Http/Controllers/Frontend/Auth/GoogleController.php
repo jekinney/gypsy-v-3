@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers\Frontend\Auth;
 
-use App\SocialProvider;
 use Socialite;
+use App\SocialProvider;
 use App\Http\Controllers\Controller;
 
-class FacebookController extends Controller
+class GoogleController extends Controller
 {
-	protected $social;
+    protected $social;
 
 	function __construct(SocialProvider $social)
 	{
@@ -23,7 +23,7 @@ class FacebookController extends Controller
      */
     public function provider()
     {
-        return Socialite::driver('facebook')->redirect();
+        return Socialite::driver('google')->redirect();
     }
 
     /**
@@ -33,8 +33,8 @@ class FacebookController extends Controller
     */
     public function callback()
     {
-        $facebook = Socialite::driver('facebook')->user();
-        $user     = $this->social->facebook($facebook);
+        $google = Socialite::driver('google')->user();
+        $user     = $this->social->google($google);
         if($user)
         {
         	return redirect()->route('account.index');
