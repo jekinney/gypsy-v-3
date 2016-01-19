@@ -16,7 +16,6 @@ class user_table_seeder extends Seeder
         	'username' => 'Jason',
         	'email'    => 'jekinneys@yahoo.com',
         	'password' => 'aubreys1',
-        	'active'   => 1,
         	'admin'    => 1,
         ]);
     }

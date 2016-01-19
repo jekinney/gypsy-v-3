@@ -13,9 +13,14 @@
 	</head>
 	<body>
 		@include('frontend/theme/partials/top_nav')
-		<header class="container-fluid">
-			<div class="well">
-				<h1>The Sentimental Gypsy</h1>
+		<header style="position:relative; margin-bottom:25px; margin-top:-20px;" width="100%">
+			<img src="{{ asset('images/site/logo.jpg') }}" height="300px">
+				<div style="position:absolute; top:20px; left:30px;">
+					<h1>The Sentimental Gypsy</h1>
+				</div>
+				<div style="position:absolute;top:75%;left:45%;" >
+					<h2 style="background-color:#5C6BC0; color:#fff; height:40px; width:100%; padding:5px 10px 15px 10px; border-radius:5px;">@yield('page-title')</h2>
+				</div>
 			</div>
 		</header>
 		<main class="container-fluid">

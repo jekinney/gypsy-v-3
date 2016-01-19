@@ -1,5 +1,9 @@
 @extends('frontend.theme.main')
 
+@section('page-title')
+	Home Page
+@endsection
+
 @section('content')
 	<header class="well text-center">
 		<h2>Follow The Sentimental Gypsy</h2>

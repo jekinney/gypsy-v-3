@@ -1,5 +1,9 @@
 @extends('frontend.theme.main')
 
+@section('page-title')
+	Articles
+@endsection
+
 @section('content')
 	<div class="row">
 		<section class="col-xs-12 col-sm-12 col-md-9 col-lg-9">
