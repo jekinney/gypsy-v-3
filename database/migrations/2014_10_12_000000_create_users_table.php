@@ -17,7 +17,7 @@ class CreateUsersTable extends Migration
             $table->string('username');
             $table->string('email')->unique();
             $table->string('password', 60)->nullable();
-            $table->string('avatar')->defualt('none');
+            $table->string('avatar')->defualt('/images/users/default/default.jpg');
             $table->rememberToken();
             $table->boolean('newsletter')->default(0);
             $table->boolean('admin')->default(0);

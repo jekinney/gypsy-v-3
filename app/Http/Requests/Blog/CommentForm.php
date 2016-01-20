@@ -13,7 +13,7 @@ class CommentForm extends Request
      */
     public function authorize()
     {
-        if(auth()->check()) return true;
+        if(auth()->check())return true;
         return false;
     }
 

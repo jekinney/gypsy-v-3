@@ -13,9 +13,31 @@ class CommentRepository
 		$this->comment = $comment;
 	}
 
+	protected function findByArticleId($article_id)
+	{
+		return $this->comment->with(['user' => function($query) {
+					$query->select('id', 'avatar', 'username');
+			   }])->where('article_id', $article_id)->latest();
+	}
+
+	public function newestByArticleId($article_id, $take = 4)
+	{
+		return $this->findByArticleId($article_id)->take($take)->get();
+	}
+
+	public function allByArticleId($article_id)
+	{
+		return $this->findByArticleId($article_id)->get();
+	}
+
 	public function add($request)
 	{
-		return $this->comment->create($request->all());
+		$comment = $this->comment->create([
+			'user_id' 	 => auth()->id(),
+			'article_id' => $request->article_id,
+			'body' 	     => $request->body,
+		]);
+		return $comment->load('user');
 	}
 
 	public function submitUpdate($request)
@@ -50,3 +72,4 @@ class CommentRepository
 	{
 		$this->comment->find($request->id)->delete();
 	}
+}

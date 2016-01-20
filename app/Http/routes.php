@@ -3,17 +3,38 @@
 |--------------------------------------------------------------------------
 | Application Routes
 |--------------------------------------------------------------------------
-|
-| This route group applies the "web" middleware group to every route
-| it contains. The "web" middleware group is defined in your HTTP
-| kernel and includes session state, CSRF protection, and more.
-|
+*/
+/*
+* Image API Routes
 */
 Route::post('/admin/blog/image/store', ['uses'=>'Backend\Blog\ImageController@store']);
+
 Route::group(['prefix' => '/admin/market/item/image'], function() {
     Route::post('store', ['as' => 'store', 'uses' => 'Backend\Market\ItemImageController@store']);
 });
+
+/*
+* Blog Comment API Routes
+*/
+Route::group(['middleware' => ['api']], function () {
+    Route::group(['prefix' => 'blog/comment', 'namespace' => 'Frontend\Blog'], function() {
+        Route::get('latest/{article_id}', 'CommentAPIController@latest');
+        Route::get('all/{article_id}', 'CommentAPIController@all');
+        Route::post('add', 'CommentAPIController@add');
+        Route::post('hide', 'CommentAPIController@hide');
+        Route::post('un-hide', 'CommentAPIController@unHide');
+        Route::put('update', 'CommentAPIController@update');
+        Route::put('remove', 'CommentAPIController@remove');
+    });
+});
+
+/*
+* All Web ROutes
+*/
 Route::group(['middleware' => ['web']], function () {
+    /*
+    * All Frontend Routes
+    */
     Route::group(['namespace' => 'Frontend'], function() {
     	Route::get('/', ['as'=>'home', 'uses' => 'Page\PageController@home']);
 
@@ -61,7 +82,9 @@ Route::group(['middleware' => ['web']], function () {
             Route::get('newsletter', ['as' => 'newsletter', 'uses' => 'AccountController@updateNewsletter']);
         });
     });
-
+    /*
+    * All Backend Routes
+    */
     Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Backend'], function() {
         Route::get('/', ['as' => 'home', 'uses'=>'Page\PageController@index']);
 
