@@ -14,7 +14,7 @@
 	<body>
 		@include('frontend/theme/partials/top_nav')
 		<header style="position:relative; margin-bottom:25px; margin-top:-20px;" width="100%">
-			<img src="{{ asset('images/site/logo.jpg') }}" height="300px">
+			<img src="{{ asset('images/site/logo.jpg') }}" class="img-responsive">
 				<div style="position:absolute; top:20px; left:30px;">
 					<h1>The Sentimental Gypsy</h1>
 				</div>
@@ -23,9 +23,7 @@
 				</div>
 			</div>
 		</header>
-		<main class="container-fluid">
-			@yield('content')
-		</main>
+		@yield('content')
 		@include('frontend/theme/partials/footer')
 		<script src="{{ asset('frontend/js/main.js') }}"></script>
 		@yield('scripts')
