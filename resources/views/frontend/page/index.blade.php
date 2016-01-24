@@ -5,7 +5,7 @@
 @endsection
 
 @section('content')
-	<header class="well text-center">
+	<header class="well text-center text-white">
 		<h2>Follow The Sentimental Gypsy</h2>
 	</header>
 	<div class="container-fluid">
@@ -33,7 +33,7 @@
 			@endforeach
 		</section>
 	</div>
-	<header class="well text-center">
+	<header class="well text-center text-white">
 		<h2>Latest Blog Articles</h2>
 	</header>
 	<div class="container-fluid">

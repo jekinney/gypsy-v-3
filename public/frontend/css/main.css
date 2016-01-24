@@ -1111,7 +1111,7 @@ hr {
   margin-top: 20px;
   margin-bottom: 20px;
   border: 0;
-  border-top: 1px solid #361605; }
+  border-top: 1px solid #56372a; }
 
 .sr-only {
   position: absolute;
@@ -1291,6 +1291,13 @@ a.text-danger:hover,
 a.text-danger:focus {
   color: #843534; }
 
+.text-white {
+  color: #ffffff; }
+
+a.text-white:hover,
+a.text-white:focus {
+  color: #e6e6e6; }
+
 .bg-primary {
   color: #fff; }
 
@@ -1332,7 +1339,7 @@ a.bg-danger:focus {
 .page-header {
   padding-bottom: 9px;
   margin: 40px 0 20px;
-  border-bottom: 1px solid #361605; }
+  border-bottom: 1px solid #56372a; }
 
 ul,
 ol {
@@ -4864,32 +4871,32 @@ button.list-group-item-danger {
       border-bottom: 1px solid #ddd; }
 
 .panel-default {
-  border-color: #361605; }
+  border-color: #56372a; }
   .panel-default > .panel-heading {
     color: #000;
     background-color: #fff;
-    border-color: #361605; }
+    border-color: #56372a; }
     .panel-default > .panel-heading + .panel-collapse > .panel-body {
-      border-top-color: #361605; }
+      border-top-color: #56372a; }
     .panel-default > .panel-heading .badge {
       color: #fff;
       background-color: #000; }
   .panel-default > .panel-footer + .panel-collapse > .panel-body {
-    border-bottom-color: #361605; }
+    border-bottom-color: #56372a; }
 
 .panel-primary {
-  border-color: #361605; }
+  border-color: #56372a; }
   .panel-primary > .panel-heading {
     color: #fff;
     background-color: #771100;
-    border-color: #361605; }
+    border-color: #56372a; }
     .panel-primary > .panel-heading + .panel-collapse > .panel-body {
-      border-top-color: #361605; }
+      border-top-color: #56372a; }
     .panel-primary > .panel-heading .badge {
       color: #771100;
       background-color: #fff; }
   .panel-primary > .panel-footer + .panel-collapse > .panel-body {
-    border-bottom-color: #361605; }
+    border-bottom-color: #56372a; }
 
 .panel-success {
   border-color: #d6e9c6; }
@@ -4976,8 +4983,8 @@ button.list-group-item-danger {
   min-height: 20px;
   padding: 19px;
   margin-bottom: 20px;
-  background-color: #AA4411;
-  border: 1px solid #361605;
+  background-color: #AB6D55;
+  border: 1px solid #56372a;
   border-radius: 4px;
   box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05); }
   .well blockquote {

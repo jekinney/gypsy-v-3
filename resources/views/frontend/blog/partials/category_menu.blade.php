@@ -4,10 +4,10 @@
     		<h3 class="panel-title">Categories</h3>
   		</div>
   		<div class="panel-body">
-			<ul class="list-unstyled">
+			<ul class="list-group">
 				@foreach($categories as $category)
-		  		<li>
-		    		{{ $category->title }}
+		  		<li class="list-group-item">
+		    		<a href="{{ route('blog.category.show', $category->slug) }}" class="btn btn-link">{{ $category->title }}</a>
 		  		</li>
 		  		@endforeach
 			</ul>

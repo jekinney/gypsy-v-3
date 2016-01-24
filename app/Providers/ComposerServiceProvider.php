@@ -16,11 +16,15 @@ class ComposerServiceProvider extends ServiceProvider
         view()->composer([
             'frontend.blog.article.ten',
             'frontend.blog.article.index',
+            'frontend.blog.category.index',
+            'frontend.blog.category.show',
             ], 'App\Http\ViewComposers\Blog\CategoryComposer'
         );
         view()->composer([
             'frontend.blog.article.ten',
             'frontend.blog.article.index',
+            'frontend.blog.category.index',
+            'frontend.blog.category.show',
             ], 'App\Http\ViewComposers\Blog\ArticleComposer'
         );
         view()->composer([

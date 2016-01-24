@@ -1,68 +1,72 @@
 @extends('frontend.theme.main')
 
 @section('content')
-	<div class="well">
-		<header>
-			<img src="{{ asset($article->header_image) }}" class="img-responsive">
-			<h2>{{ $article->title }}</h2>
-		</header>
-		<footer>
-			<ul class="list-inline">
-				<li>Author: {{ $article->author->username }}</li>
-				<li>Category: {{ $article->category->title }}</li>
-				<li>Published on: {{ $article->publish_at->diffForHumans() }}</li>
-				<li>Reads: {{ $article->reads }}</li>
-			</ul>
-		</footer>
-		<hr>
-		<article>
-			{!! $article->body !!}
-		</article>
-	</div>
+	<section class="thumbnail">
+		<img src="{{ asset($article->header_image) }}">
+		<div class="caption">
+			<header>
+				<h1>{{ $article->title }}</h1>
+			</header>
+			<footer>
+				<ul class="list-inline">
+					<li>Author: {{ $article->author->username }}</li>
+					<li>Category: {{ $article->category->title }}</li>
+					<li>Published on: {{ $article->publish_at->diffForHumans() }}</li>
+					<li>Reads: {{ $article->reads }}</li>
+				</ul>
+			</footer>
+			<hr>
+			<article class="lead">
+				{!! $article->body !!}
+			</article>
+		</div>
+	</section>
 
-	<section id="comments" data-article-id="{{ $article->id }}" class="well">
-		<header class="row">
-			<h3 class="col-xs-10">
+	<section id="comments" data-article-id="{{ $article->id }}" class="panel panel-default">
+		<div class="panel-body">	
+		<header>
+			<h3>
 				Total of 
 				<span id="comment-count" data-comment-count="{{ $article->comments->count() }}" v-text="commentCount"></span> 
 				Comments
+				<div class="pull-right text-right">
+					<button @click="displayAllComments" class="btn btn-primary">See All Comments</button>
+				</div>
 			</h3>
-			<div class="col-xs-2 text-right">
-				<button @click="displayAllComments" class="btn btn-primary">See All Comments</button>
-			</div>
 		</header>
-		@if(auth()->guest())
-			<h5>Sorry, you must be logged in to leave a comment</h5>
-		@endif
-		<div  v-for="comment in comments" class="media well">
-		  	<div class="media-left">
-		      	<img class="media-object img-circle" 
-		      		:src="comment.user.avatar" 
-		      		:bind:alt="comment.user.username"
-		      		height="75px" 
-		      	>
-		  	</div>
-		  	<div class="media-body">
-		    	<h4 class="media-heading">
-		    		<span v-text="comment.user.username"></span> 
-		    		said on 
-		    		<span v-text="formatCreatedAtDate(comment.created_at)"></span>
-		    	</h4>
-		    	<span v-html="comment.body"></span>
-		  	</div>
+			@if(auth()->guest())
+				<h5 class="text-center">Sorry, you must be logged in to leave a comment</h5>
+			@endif
+			<div  v-for="comment in comments" class="media">
+			  	<div class="media-left">
+			      	<img class="media-object img-circle" 
+			      		:src="comment.user.avatar" 
+			      		:bind:alt="comment.user.username"
+			      		height="75px" 
+			      	>
+			  	</div>
+			  	<div class="media-body">
+			    	<h4 class="media-heading">
+			    		<span v-text="comment.user.username"></span> 
+			    		said on 
+			    		<span v-text="formatCreatedAtDate(comment.created_at)"></span>
+			    	</h4>
+			    	<span v-html="comment.body"></span>
+			  	</div>
+			</div>
+			@if(auth()->check())
+				<form method="post" @submit.prevent="addComment">
+					<h5 v-show="validation.error" v-text="validation.message" class="text-danger"></h5>
+					<div class="form-group" :class="{ 'has-error': validation.error }">
+						<label for="comment" class="control-label">Leave a comment</label>
+						<textarea v-model="comment" id="comment" class="form-control"></textarea>
+					</div>
+					<div class="form-group text-right">
+						<button type="submit" class="btn btn-primary">Leave Comment</button>
+					</div>
+				</form>
+			@endif
 		</div>
-		@if(auth()->check())
-			<form method="post" @submit.prevent="addComment">
-				<h5 v-show="validation.error" v-text="validation.message" class="text-danger"></h5>
-				<div class="form-group" :class="{ 'has-error': validation.error }">
-					<label for="comment" class="control-label">Leave a comment</label>
-					<textarea v-model="comment" id="comment" class="form-control"></textarea>
-				</div>
-				<div class="form-group text-right">
-					<button type="submit" class="btn btn-primary">Leave Comment</button>
-				</div>
-			</form>
-		@endif
 	</section>
 @endsection
 
@@ -144,7 +148,7 @@
 			},
 			formatCreatedAtDate: function(date)
 			{
-				return moment(date).format('MMMM Do YYYY, h:mm:ss a');
+				return moment(date).format('MMMM Do YYYY, h:mm a');
 			},
 			displayComments: function(comment) {
 				if(this.showAllComments === false) {

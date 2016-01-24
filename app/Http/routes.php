@@ -50,7 +50,11 @@ Route::group(['middleware' => ['web']], function () {
         Route::group(['prefix' => 'blog', 'as' => 'blog.', 'namespace' => 'Blog'], function() {
     	   Route::get('/', ['as' => 'articles.index', 'uses'=>'ArticleController@index']);
     	   Route::get('article/{slug}', ['as' => 'article.show', 'uses'=>'ArticleController@show']);
-    	   Route::get('categories', ['as' => 'categories.all', 'uses'=>'CategoryController@listWithCount']);
+
+            Route::group(['prefix' => 'category', 'as' => 'category.'], function() {
+    	        Route::get('/', ['as' => 'index', 'uses'=>'CategoryController@listWithCount']);
+                Route::get('{slug}', ['as' => 'show', 'uses'=>'CategoryController@show']);
+            });
         });
         Route::group(['prefix' => 'gallery', 'as' => 'gallery.', 'namespace' => 'Gallery'], function() {
             Route::get('/', ['as' => 'index', 'uses'=>'GalleryController@index']);

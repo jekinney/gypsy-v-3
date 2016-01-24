@@ -3,7 +3,7 @@
 @section('content')
 	<section class="container-fluid">
 		<div class="row">
-			<section class="well col-xs-12 col-sm-8 col-md-9">
+			<section class="well text-white col-xs-12 col-sm-8 col-md-9">
 				<header class="text-center">
 					<h2>{{ auth()->user()->username }}'s Account</h2>
 				</header>

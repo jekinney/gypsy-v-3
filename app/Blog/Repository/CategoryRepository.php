@@ -2,6 +2,7 @@
 
 namespace App\Blog\Repository;
 
+use App\Blog\Article;
 use App\Blog\Category;
 
 class CategoryRepository
@@ -29,6 +30,13 @@ class CategoryRepository
     			->with(['articles' => function($q) {
                   	$q->select(['id']);
                	}])->get();
+    }
+
+    public function findBySlugWithArticlesPaginated($slug, $limit = 5)
+    {
+        $category = $this->category->where('slug', $slug)->first();
+        $articles = Article::with('author')->where('category_id', $category->id)->paginate($limit);
+        return collect(['category' => $category, 'articles' => $articles]);
     }
 
     public function addNew($request)

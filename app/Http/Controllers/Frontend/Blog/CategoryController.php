@@ -14,10 +14,17 @@ class CategoryController extends Controller
     	$this->category = $category;
     }
 
-    public function listWithCount()
+    public function index()
     {
     	$categories = $this->category->listingWithArticleCount();
     	
     	return view('frontend.blog.category.index', compact('categories'));
+    }
+
+    public function show($slug)
+    {
+        $category = $this->category->findBySlugWithArticlesPaginated($slug);
+        
+        return view('frontend.blog.category.show', compact('category'));
     }
 }
