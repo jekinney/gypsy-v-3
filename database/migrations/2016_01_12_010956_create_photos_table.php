@@ -12,8 +12,12 @@ class CreatePhotosTable extends Migration
      */
     public function up()
     {
-        Schema::create('photos', function (Blueprint $table) {
+        Schema::create('gallery_photos', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('album_id')->unsigned()->index();
+            $table->string('thumbnail', 120);
+            $table->string('image', 120);
+            $table->string('description', 600);
             $table->timestamps();
         });
     }
@@ -25,6 +29,6 @@ class CreatePhotosTable extends Migration
      */
     public function down()
     {
-        Schema::drop('photos');
+        Schema::drop('gallery_photos');
     }
 }

@@ -23,11 +23,15 @@ elixir(function(mix) {
     //mix.copy('node_modules/moment/moment.js', 'resources/assets/js/moment.js');
     //mix.copy('node_modules/twix/dist/twix.js', 'resources/assets/js/twix.js');
     //mix.copy('node_modules/jquery-ui/jquery-ui.js', 'resources/assets/js/jquery-ui.js');
+    //mix.copy('node_modules/jsonlylightbox/css/lightbox.css', 'resources/assets/css/lightbox.css');
+    //mix.copy('node_modules/jsonlylightbox/js/lightbox.js', 'resources/assets/js/lightbox.js');
+    //mix.copy('node_modules/jsonlylightbox/img', 'public/img');
     mix.sass(['app.scss'], 'resources/assets/frontend/css/main.css');
 
     mix.styles([
         '../frontend/css/main.css',
         'sweet-alert.css',
+        'lightbox.css',
         ], 'public/frontend/css/main.css');
     
     mix.scripts([
@@ -37,6 +41,7 @@ elixir(function(mix) {
         'vue.js', 
         'vue-resource.js', 
         'sweet-alert.js',
+        'lightbox.js',
         ], 'public/frontend/js/main.js');
 
     mix.version(['frontend/css/main.css', 'frontend/js/main.js']);

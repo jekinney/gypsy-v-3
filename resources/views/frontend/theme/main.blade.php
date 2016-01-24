@@ -18,9 +18,6 @@
 				<div style="position:absolute; top:20px; left:30px;">
 					<h1>The Sentimental Gypsy</h1>
 				</div>
-				<div style="position:absolute;top:75%;left:45%;" >
-					<h2 style="background-color:#5C6BC0; color:#fff; height:40px; width:100%; padding:5px 10px 15px 10px; border-radius:5px;">@yield('page-title')</h2>
-				</div>
 			</div>
 		</header>
 		@yield('content')

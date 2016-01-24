@@ -1,43 +1,49 @@
 @extends('frontend.theme.main')
 
 @section('content')
-	<div id="gallery" class="row">
-		<section class="col-xs-12 col-sm-10 col-md-9 col-lg-9">
-			<div class="well">
-				<div v-for="image in images">
-					<div class="col-xs-6 col-md-3">
-	    				<a role="button" class="thumbnail">
-	      					<img v-bind:src="image.thumbnail" alt="@{{image.name}}">
-	    				</a>
-	    				@{{ image.description }}
-	  				</div>
-	  			</div>
-			</div>
-		</section>
-		<aside class="hidden-xs col-sm-2 col-md-3 col-lg-3">
-			<div class="panel panel-primary">
-		  		<div class="panel-heading text-center">
-		    		<h3 class="panel-title">Image Categories</h3>
-		  		</div>
-		  		<div class="panel-body">
-					<ul class="list-unstyled">
-					</ul>
+	<section class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+		@foreach($albums as $album)
+			<div class="panel panel-default">
+    			<div class="panel-heading" role="tab" id="{{ $album->slug }}">
+      				<h4 class="panel-title">
+        				<a role="button" 
+        					data-toggle="collapse" 
+        					data-parent="#accordion" 
+        					href="#{{ $album->id }}" 
+        					aria-expanded="{{ ($albums->first()->id == $album->id? 'true':'false') }}" 
+        					aria-controls="{{ $album->id }}" 
+        				>
+          					{{ $album->name }}
+        				</a>
+      				</h4>
+    			</div>
+    			<div id="{{ $album->id }}" 
+    				class="panel-collapse collapse {{ ($albums->first()->id == $album->id? 'in':'') }}" 
+    				role="tabpanel" 
+    				aria-labelledby="{{ $album->slug }}"
+    			>
+	    			<div class="panel-body text-center">
+				 		@foreach($album->photos as $photo)
+			      			<img 
+			      				src="{{ $photo->thumbnail }}" 
+			      				class="jslghtbx-thmb" 
+			      				alt="..." 
+			      				data-jslghtbx="{{ $photo->image }}"
+			      				data-jslghtbx-group="{{ $album->id }}"
+			      				data-jslghtbx-caption="{{ $photo->description }}"
+			      			>
+						@endforeach 
+					</div>
 				</div>
 			</div>
-		</aside>
-	</div>
+		@endforeach
+	</section>
 @endsection
+
 
 @section('scripts')
 	<script>
-		new Vue({
-			el: '#gallery',
-			data: {
-				images: [],
-			},
-			ready: function() {
-
-			},
-		})
+    	var lightbox = new Lightbox();
+    	lightbox.load();
 	</script>
 @endsection

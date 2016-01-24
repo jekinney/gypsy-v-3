@@ -13,6 +13,10 @@ Route::group(['prefix' => '/admin/market/item/image'], function() {
     Route::post('store', ['as' => 'store', 'uses' => 'Backend\Market\ItemImageController@store']);
 });
 
+Route::group(['prefix' => '/admin/gallery/photo'], function() {
+    Route::post('store', ['as' => 'store', 'uses' => 'Backend\Gallery\PhotoController@store']);
+});
+
 /*
 * Blog Comment API Routes
 */
@@ -136,6 +140,19 @@ Route::group(['middleware' => ['web']], function () {
                 Route::post('main', ['as' => 'main', 'uses' => 'ItemImageController@main']);
                 Route::delete('remove', ['as' => 'remove', 'uses' => 'ItemImageController@remove']);
             });
+        });
+        Route::group(['prefix' => 'gallery', 'as' => 'gallery.', 'namespace' => 'Gallery'], function() {
+          Route::group(['prefix' => 'album', 'as' => 'album.'], function() {
+            Route::get('index', ['as' => 'index', 'uses' => 'AlbumController@index']);
+            Route::get('show/{id}', ['as' => 'show', 'uses' => 'AlbumController@show']);
+            Route::post('store', ['as' => 'store', 'uses' => 'AlbumController@store']);
+            Route::put('update', ['as' => 'update', 'uses' => 'AlbumController@update']);
+          });
+          Route::group(['prefix' => 'photo', 'as' => 'photo.'], function() {
+            Route::get('index', ['as' => 'index', 'uses' => 'PhotoController@index']);
+            Route::put('update', ['as' => 'update', 'uses' => 'PhotoController@update']);
+            Route::delete('remove', ['as' => 'remove', 'uses' => 'PhotoController@remove']);
+          });
         });
     });
 });

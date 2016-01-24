@@ -35,7 +35,7 @@
                 </ul>
             </li>
             <li class="{{ Request::segment(2) === 'gallery' ? 'active' : '' }}">
-                <a href="">
+                <a href="{{ route('admin.gallery.album.index') }}">
                     <i class="fa fa-camera"></i> <span>Image Gallery</span>
                 </a>
             </li>
