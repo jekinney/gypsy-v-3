@@ -1,6 +1,11 @@
 @extends('frontend.theme.main')
 
 @section('content')
+	<div class="well text-white">
+		<header class="container">
+			<h1>Albums and Photos</h1>
+		</header>
+	</div>
 	<section class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
 		@foreach($albums as $album)
 			<div class="panel panel-default">

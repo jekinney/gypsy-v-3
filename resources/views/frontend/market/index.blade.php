@@ -1,11 +1,12 @@
 @extends('frontend.theme.main')
 
-@section('page-title')
-	Upcoming Markets
-@endsection
-
 @section('content')
-	<div class="row">
+	<div class="well text-white">
+		<header class="container">
+			<h1>Upcoming Markets</h1>
+		</header>
+	</div>
+	<main class="row">
 		<section class="col-xs-12 col-sm-12 col-md-9 col-lg-9">
 			@foreach($markets->chunk(3) as $chunk)
 				<section class="row">
@@ -23,6 +24,7 @@
 										<li>For {{ $market->times->count() }} Days</li>
 									</ul>
 									{!! $market->description !!}
+									<hr>
 									<div class="text-center">
 										<a href="{{ route('market.show', $market->slug) }}" class="btn btn-primary btn-sm">More Details</a>
 									</div>
@@ -58,5 +60,5 @@
   				</div>
 			</div>
 		</aside>
-	</div>
+	</main>
 @endsection

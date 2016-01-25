@@ -18,12 +18,14 @@
 						</header>
 						<article class="caption">
 							<h2 class="text-center">{{ $market->type->title }}</h2>
+							<hr>
 							<ul class="list-inline">
 								<li>Starts: {{ $market->start_at->format('l jS \\of F Y') }}</li>
 								<li>Ends: {{ $market->end_at->format('l jS \\of F Y') }}</li>
 								<li>For {{ $market->times->count() }} Days</li>
 							</ul>
 							{!! $market->description !!}
+							<hr>
 							<div class="text-center">
 								<a href="{{ route('market.show', $market->slug) }}" class="btn btn-primary btn-sm">More Details</a>
 							</div>
@@ -54,7 +56,9 @@
 										<li>Reads: {{ $article->reads }}</li>
 									</ul>
 								</footer>
+								<hr>
 								<p>{{ $article->snippet }}</p>
+								<hr>
 								<div class="text-right">
 									<a href="{{ route('blog.article.show', $article->slug) }}" class="btn btn-primary btn-sm">Read More</a>
 								</div>

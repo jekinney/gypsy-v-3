@@ -4,10 +4,10 @@
 	<section class="thumbnail">
 		<img src="{{ asset($article->header_image) }}">
 		<div class="caption">
-			<header>
+			<header class="text-center">
 				<h1>{{ $article->title }}</h1>
 			</header>
-			<footer>
+			<footer class="text-center">
 				<ul class="list-inline">
 					<li>Author: {{ $article->author->username }}</li>
 					<li>Category: {{ $article->category->title }}</li>

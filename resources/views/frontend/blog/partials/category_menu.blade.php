@@ -10,6 +10,9 @@
 		    		<a href="{{ route('blog.category.show', $category->slug) }}" class="btn btn-link">{{ $category->title }}</a>
 		  		</li>
 		  		@endforeach
+		  		<li class="list-group-item">
+		    		<a href="{{ route('blog.category.index') }}" class="btn btn-link">All Categories</a>
+		  		</li>
 			</ul>
 		</div>
 	</div>
@@ -18,11 +21,13 @@
     		<h3 class="panel-title">Newest Articles</h3>
   		</div>
   		<div class="panel-body">
-			<ul class="list-unstyled">
+			<ul class="list-group">
 				@foreach($tenRecentArticles as $article)
-		  		<li>
-		  			<span class="badge text-primary pull-right">{{ $article->reads }}</span>
-		    		{{ $article->title }}
+		  		<li class="list-group-item">
+		  			<a href="{{ route('blog.article.show', $article->slug) }}">
+		  				<span class="badge pull-right">{{ $article->reads }}</span>
+		    			{{ $article->title }}
+		    		</a>
 		  		</li>
 		  		@endforeach
 			</ul>
@@ -33,11 +38,13 @@
     		<h3 class="panel-title">Top Ten Articles</h3>
   		</div>
   		<div class="panel-body">
-			<ul class="list-unstyled">
+			<ul class="list-group">
 				@foreach($topTenArticles as $article)
-		  		<li>
-		    		<span class="badge text-primary pull-right">{{ $article->reads }}</span>
-		    		{{ $article->title }}
+		  		<li class="list-group-item">
+		  			<a href="{{ route('blog.article.show', $article->slug) }}">
+		    			<span class="badge text-primary pull-right">{{ $article->reads }}</span>
+		    			{{ $article->title }}
+		    		</a>
 		  		</li>
 		  		@endforeach
 			</ul>

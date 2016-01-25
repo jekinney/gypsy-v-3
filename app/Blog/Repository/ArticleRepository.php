@@ -59,7 +59,7 @@ class ArticleRepository
             ->active()
             ->orderBy('publish_at', 'desc')
             ->take(10)
-            ->get(['title', 'reads']);
+            ->get(['slug', 'title', 'reads']);
     }
 
     public function topTenTitles()
@@ -69,7 +69,7 @@ class ArticleRepository
             ->orderBy('reads', 'desc')
             ->take(10)
             ->orderBy('publish_at', 'desc')
-            ->get(['title', 'reads']);
+            ->get(['slug', 'title', 'reads']);
     }
 
     public function allPaginated($pagination = 10)

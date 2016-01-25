@@ -52,7 +52,7 @@ Route::group(['middleware' => ['web']], function () {
     	   Route::get('article/{slug}', ['as' => 'article.show', 'uses'=>'ArticleController@show']);
 
             Route::group(['prefix' => 'category', 'as' => 'category.'], function() {
-    	        Route::get('/', ['as' => 'index', 'uses'=>'CategoryController@listWithCount']);
+    	        Route::get('/', ['as' => 'index', 'uses'=>'CategoryController@index']);
                 Route::get('{slug}', ['as' => 'show', 'uses'=>'CategoryController@show']);
             });
         });

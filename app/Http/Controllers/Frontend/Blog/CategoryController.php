@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Frontend\Blog;
 
 use App\Http\Controllers\Controller;
+use App\Blog\Repository\ArticleRepository;
 use App\Blog\Repository\CategoryRepository;
 
 class CategoryController extends Controller
@@ -14,11 +15,12 @@ class CategoryController extends Controller
     	$this->category = $category;
     }
 
-    public function index()
+    public function index(ArticleRepository $article)
     {
-    	$categories = $this->category->listingWithArticleCount();
+    	$categories = $this->category->listingWithArticles();
+        $articles   = $article->publishedCountWithCommentCount();
     	
-    	return view('frontend.blog.category.index', compact('categories'));
+    	return view('frontend.blog.category.index', compact('categories', 'articles'));
     }
 
     public function show($slug)

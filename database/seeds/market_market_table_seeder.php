@@ -22,7 +22,7 @@ class market_market_table_seeder extends Seeder
 		        Market::create([
 		        	'type_id' => $type->id,
 		        	'title' => $title,
-		        	'slug' => $title,
+		        	'slug' => str_slug($title),
 		        	'description' => $faker->paragraph,
 		        	'start_at' => Carbon::now()->addWeeks($count),
 		        	'end_at' => Carbon::now()->addWeeks($count+1),

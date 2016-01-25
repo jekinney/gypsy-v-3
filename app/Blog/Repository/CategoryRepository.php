@@ -32,6 +32,14 @@ class CategoryRepository
                	}])->get();
     }
 
+    public function listingWithArticles()
+    {
+        return $this->category
+                ->with(['articles' => function($q) {
+                    $q->with('author')->select(['id', 'category_id', 'slug', 'title', 'snippet']);
+                }])->get();
+    }
+
     public function findBySlugWithArticlesPaginated($slug, $limit = 5)
     {
         $category = $this->category->where('slug', $slug)->first();
